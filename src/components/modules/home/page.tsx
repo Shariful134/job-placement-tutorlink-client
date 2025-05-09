@@ -302,7 +302,7 @@ const HomeComponent = () => {
   }));
 
   const allSubjects = tutors?.map((tutor) => tutor.subjects);
-  const uniqueSubjects = [...new Set(allSubjects.flat())];
+  const uniqueSubjects = [...new Set(allSubjects?.flat())];
 
   console.log(uniqueSubjects);
   const allCategories = tutors?.map((tutor) => tutor.category);

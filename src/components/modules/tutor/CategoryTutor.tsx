@@ -265,7 +265,7 @@ const CategoryTutor = ({ categoryId }: { categoryId: string }) => {
   }));
 
   const allSubjects = tutors?.map((tutor) => tutor.subjects);
-  const uniqueSubjects = [...new Set(allSubjects.flat())];
+  const uniqueSubjects = [...new Set(allSubjects?.flat())];
 
   const allCategories = tutors?.map((tutor) => tutor.category);
   const categories = [...new Set(allCategories)];
@@ -279,7 +279,7 @@ const CategoryTutor = ({ categoryId }: { categoryId: string }) => {
     indexOfLastTutor
   );
 
-  const totalPages = Math.ceil(updatedTutors.length / tutorsPerPage);
+  const totalPages = Math.ceil(updatedTutors?.length / tutorsPerPage);
 
   useEffect(() => {
     window.scrollTo({ top: 200, behavior: "smooth" });
