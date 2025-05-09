@@ -306,11 +306,13 @@ const HomeComponent = () => {
     ...tutor,
     ratings: ratingsMap[tutor._id] || tutor.ratings,
   }));
+  const allCategories = updatedTutors?.map((tutor) => tutor.category);
+  const categories = [...new Set(allCategories)];
 
   return (
     <div>
       {/* =============================Banner section=========================== */}
-      <div className="flex flex-col md:flex-row px-5 md:px-10 items-center pt-15 md:pt-20">
+      <div className="container mx-auto flex flex-col md:flex-row items-center pt-15 md:pt-20">
         <div className="pt-5 text-center md:text-start">
           <h2 className="text-2xl md:text-3xl lg:text-5xl  ">
             Learn Better, <span className="text-pink-500">AcademyNest !</span>
@@ -347,7 +349,7 @@ const HomeComponent = () => {
         </div>
       </div>
       <div>
-        <div className=" flex justify-center items-center bg-gray-200 px-10">
+        <div className="container mx-auto flex justify-center items-center bg-gray-200 ">
           <Image
             src={bkash}
             priority={true}
@@ -374,37 +376,34 @@ const HomeComponent = () => {
 
       {/* =========================category section ========================= */}
       <div>
-        <div className="px-10 mt-5  ">
+        <div className="container mx-auto mt-5  ">
           <h2 className="text-xl md:text-2xl lg:text-4xl text-center md:text-start  mb-5 ">
             Course <span className="text-pink-500">Categories ____</span>
           </h2>
           <div>
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-y-3 mb-5 items-center gap-2 mt-2">
-              <Card className="w-[95%] border border-gray-200 hover:shadow-lg">
-                <Link href={"/computer"}>
-                  <CardContent className="flex flex-col items-center">
-                    <Image
-                      className=""
-                      priority={true}
-                      src={computer}
-                      width={100}
-                      height={100}
-                      alt="BannerImg"
-                    ></Image>
-                    <p className="text-sm md:text-sm lg:text-lg  ">Computer</p>
-                    <p className="text-sm md:text-sm lg:text-lg text-gray-700 ">
-                      PostGraduate
-                    </p>
-                    <div className="flex gap-1">
-                      <FaStar className="text-yellow-500" />
-                      <FaStar className="text-yellow-500" />
-                      <FaStarHalfAlt className="text-yellow-500" />
-                      <FaRegStar className="text-yellow-500" />
-                    </div>
-                  </CardContent>
-                </Link>
-              </Card>
-              <Card className="w-[95%] border-gray-200 hover:shadow-2xl">
+              {categories?.map((category: string, index: number) => (
+                <Card
+                  key={index}
+                  className="w-[95%] border border-gray-200 hover:shadow-lg"
+                >
+                  <Link href={`/category/${category}`}>
+                    <CardContent className="flex flex-col items-center">
+                      <p className="text-sm md:text-sm lg:text-lg  ">
+                        {category}
+                      </p>
+
+                      <div className="flex gap-1">
+                        <FaStar className="text-yellow-500" />
+                        <FaStar className="text-yellow-500" />
+                        <FaStarHalfAlt className="text-yellow-500" />
+                        <FaRegStar className="text-yellow-500" />
+                      </div>
+                    </CardContent>
+                  </Link>
+                </Card>
+              ))}
+              {/* <Card className="w-[95%] border-gray-200 hover:shadow-2xl">
                 <Link href={"#"}>
                   <CardContent className="flex flex-col items-center">
                     <Image
@@ -499,7 +498,7 @@ const HomeComponent = () => {
                     </div>
                   </CardContent>
                 </Link>
-              </Card>
+              </Card> */}
             </div>
           </div>
         </div>

@@ -148,8 +148,8 @@ const TutorDetailsComponent = ({ id }: { id: string }) => {
   }
   return (
     <>
-      <div className="pt-20 px-10 ">
-        <div className="">
+      <div className="container mx-auto pt-20 ">
+        <div className="shadow-sm">
           {tutorDetails?.map((tutorData: ITutor) => (
             <div
               key={tutorData?._id}
@@ -158,8 +158,8 @@ const TutorDetailsComponent = ({ id }: { id: string }) => {
               <div className="flex flex-col justify-center items-center">
                 <Image
                   src={tutorData?.profileImage ?? "/default-profile.png"}
-                  width={200}
-                  height={200}
+                  width={600}
+                  height={300}
                   alt={tutorData?.name ?? "Tutor"}
                   className="rounded-md"
                 ></Image>
@@ -242,7 +242,7 @@ const TutorDetailsComponent = ({ id }: { id: string }) => {
         </div>
 
         {/* =============================Releted Tutor================================ */}
-        <div className="flex flex-wrap justify-start mt-5  gap-3 ">
+        <div className="container mx-auto shadow-sm p-5 flex flex-wrap justify-start mt-5  gap-3 ">
           {reletedTutors?.map((tutor) => (
             <div
               key={tutor._id}

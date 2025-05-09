@@ -70,35 +70,104 @@ export default function Navbar() {
   }
 
   return (
-    <div className="navbar  bg-gray-200 shadow-sm pe-7 md:px-10   fixed z-1 ">
-      <div className="navbar-start">
-        <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden ">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+    <div className="bg-gray-200 ">
+      <div className="container mx-auto navbar  pe-7 md:px-10   sticky top-0 z-50 ">
+        <div className="navbar-start">
+          <div className="dropdown">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost lg:hidden "
             >
-              {" "}
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />{" "}
-            </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                {" "}
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />{" "}
+              </svg>
+            </div>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content  bg-gray-200 rounded-box z-1 mt-3 w-52 p-2 shadow"
+            >
+              <Link
+                className={
+                  pathname == "/"
+                    ? "text-purple-600 underline text-sm "
+                    : "text-black text-sm  hover:text-purple-600 hover:underline"
+                }
+                href="/"
+              >
+                Home
+              </Link>
+              <Link
+                className={
+                  pathname == "/tutors"
+                    ? "text-purple-600 underline text-sm  "
+                    : "text-black text-sm  hover:text-purple-600 hover:underline"
+                }
+                href="/tutors"
+              >
+                Tutors
+              </Link>
+              <Link
+                className={
+                  pathname == "/contact"
+                    ? "text-purple-600 underline text-sm  "
+                    : "text-black text-sm  hover:text-purple-600  hover:underline"
+                }
+                href="/contact"
+              >
+                Contact
+              </Link>
+              <Link
+                className={
+                  pathname == "/about"
+                    ? "text-purple-600 underline text-sm  "
+                    : "text-black text-sm  hover:text-purple-600 hover:underline"
+                }
+                href="/about"
+              >
+                About
+              </Link>
+              <Link
+                className={
+                  pathname == "/blog"
+                    ? "text-purple-600 underline text-sm  "
+                    : "text-black text-sm  hover:text-purple-600 hover:underline "
+                }
+                href="/blog"
+              >
+                Blogs{" "}
+              </Link>
+            </ul>
           </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content  bg-gray-200 rounded-box z-1 mt-3 w-52 p-2 shadow"
-          >
+          <a className=" text-xl">
+            <Image
+              className="hidden lg:inline"
+              src={tutorlin}
+              width={60}
+              height={60}
+              alt="tutorlink"
+            ></Image>
+          </a>
+        </div>
+        <div className="navbar-end hidden lg:flex ">
+          <ul className="menu menu-horizontal px-1 flex  justify-center items-center gap-5">
             <Link
               className={
                 pathname == "/"
-                  ? "text-purple-600 underline text-sm "
-                  : "text-black text-sm  hover:text-purple-600 hover:underline"
+                  ? "text-purple-600 underline text-lg "
+                  : "text-black text-lg hover:text-purple-600 hover:underline"
               }
               href="/"
             >
@@ -107,8 +176,8 @@ export default function Navbar() {
             <Link
               className={
                 pathname == "/tutors"
-                  ? "text-purple-600 underline text-sm  "
-                  : "text-black text-sm  hover:text-purple-600 hover:underline"
+                  ? "text-purple-600 underline text-lg "
+                  : "text-black text-lg hover:text-purple-600 hover:underline"
               }
               href="/tutors"
             >
@@ -117,8 +186,8 @@ export default function Navbar() {
             <Link
               className={
                 pathname == "/contact"
-                  ? "text-purple-600 underline text-sm  "
-                  : "text-black text-sm  hover:text-purple-600  hover:underline"
+                  ? "text-purple-600 underline text-lg "
+                  : "text-black text-lg hover:text-purple-600 hover:underline"
               }
               href="/contact"
             >
@@ -127,8 +196,8 @@ export default function Navbar() {
             <Link
               className={
                 pathname == "/about"
-                  ? "text-purple-600 underline text-sm  "
-                  : "text-black text-sm  hover:text-purple-600 hover:underline"
+                  ? "text-purple-600 underline text-lg "
+                  : "text-black text-lg hover:text-purple-600 hover:underline"
               }
               href="/about"
             >
@@ -137,8 +206,8 @@ export default function Navbar() {
             <Link
               className={
                 pathname == "/blog"
-                  ? "text-purple-600 underline text-sm  "
-                  : "text-black text-sm  hover:text-purple-600 hover:underline "
+                  ? "text-purple-600 underline text-lg "
+                  : "text-black text-lg hover:text-purple-600 hover:underline"
               }
               href="/blog"
             >
@@ -146,130 +215,67 @@ export default function Navbar() {
             </Link>
           </ul>
         </div>
-        <a className=" text-xl">
-          <Image
-            className="hidden lg:inline"
-            src={tutorlin}
-            width={60}
-            height={60}
-            alt="tutorlink"
-          ></Image>
-        </a>
-      </div>
-      <div className="navbar-end hidden lg:flex ">
-        <ul className="menu menu-horizontal px-1 flex  justify-center items-center gap-5">
-          <Link
-            className={
-              pathname == "/"
-                ? "text-purple-600 underline text-lg "
-                : "text-black text-lg hover:text-purple-600 hover:underline"
-            }
-            href="/"
-          >
-            Home
-          </Link>
-          <Link
-            className={
-              pathname == "/tutors"
-                ? "text-purple-600 underline text-lg "
-                : "text-black text-lg hover:text-purple-600 hover:underline"
-            }
-            href="/tutors"
-          >
-            Tutors
-          </Link>
-          <Link
-            className={
-              pathname == "/contact"
-                ? "text-purple-600 underline text-lg "
-                : "text-black text-lg hover:text-purple-600 hover:underline"
-            }
-            href="/contact"
-          >
-            Contact
-          </Link>
-          <Link
-            className={
-              pathname == "/about"
-                ? "text-purple-600 underline text-lg "
-                : "text-black text-lg hover:text-purple-600 hover:underline"
-            }
-            href="/about"
-          >
-            About
-          </Link>
-          <Link
-            className={
-              pathname == "/blog"
-                ? "text-purple-600 underline text-lg "
-                : "text-black text-lg hover:text-purple-600 hover:underline"
-            }
-            href="/blog"
-          >
-            Blogs{" "}
-          </Link>
-        </ul>
-      </div>
-      <div className={user ? "navbar-end lg:w-15" : "navbar-end lg:w-25"}>
-        {user ? (
-          <>
-            <DropdownMenu>
-              <DropdownMenuTrigger>
-                <Avatar className="size-10 rouded-full ">
-                  {profileImg ? (
-                    <AvatarImage src={profileImg} />
-                  ) : (
-                    <AvatarImage src="https://github.com/shadcn.png" />
-                  )}
-                </Avatar>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="border border-gray-400 bg-white mt-2 mr-2 ">
-                <DropdownMenuLabel className="font-semibold">
-                  <div className="flex justify-center flex-col items-center gap-2">
-                    <Avatar className="size-10 rouded-full ">
+        <div className={user ? "navbar-end lg:w-15" : "navbar-end lg:w-25"}>
+          {user ? (
+            <>
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <Avatar className="size-10 rouded-full ">
+                    {profileImg ? (
+                      <AvatarImage src={profileImg} />
+                    ) : (
                       <AvatarImage src="https://github.com/shadcn.png" />
-                      <AvatarFallback>CN</AvatarFallback>
-                    </Avatar>
-                    <Link href={`/${role}/dashboard`}>
-                      <Button className="roudend-full border-0 btn cursor-pointer bg-gray-300 text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ...">
-                        {" "}
-                        View Profile
-                      </Button>
-                    </Link>
-                  </div>
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
+                    )}
+                  </Avatar>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="border border-gray-400 bg-white mt-2 mr-2 ">
+                  <DropdownMenuLabel className="font-semibold">
+                    <div className="flex justify-center flex-col items-center gap-2">
+                      <Avatar className="size-10 rouded-full ">
+                        <AvatarImage src="https://github.com/shadcn.png" />
+                        <AvatarFallback>CN</AvatarFallback>
+                      </Avatar>
+                      <Link href={`/${role}/dashboard`}>
+                        <Button className="roudend-full border-0 btn cursor-pointer bg-gray-300 text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ...">
+                          {" "}
+                          View Profile
+                        </Button>
+                      </Link>
+                    </div>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
 
-                <Link href={`/${role}/dashboard`}>
-                  <DropdownMenuItem className="hover:bg-gray-200 px-3 py-2 cursor-pointer">
-                    Dashboard
+                  <Link href={`/${role}/dashboard`}>
+                    <DropdownMenuItem className="hover:bg-gray-200 px-3 py-2 cursor-pointer">
+                      Dashboard
+                    </DropdownMenuItem>
+                  </Link>
+                  <Link href={`/${role}/bookings`}>
+                    <DropdownMenuItem className="hover:bg-gray-200 px-3 py-2 cursor-pointer">
+                      Bookings
+                    </DropdownMenuItem>
+                  </Link>
+                  <DropdownMenuSeparator className="border-b border-gray-400" />
+                  <DropdownMenuItem
+                    className="hover:bg-gray-200 px-3 py-2 cursor-pointer"
+                    onClick={handleLogOut}
+                  >
+                    <LogOut /> LogOut
                   </DropdownMenuItem>
-                </Link>
-                <Link href={`/${role}/bookings`}>
-                  <DropdownMenuItem className="hover:bg-gray-200 px-3 py-2 cursor-pointer">
-                    Bookings
-                  </DropdownMenuItem>
-                </Link>
-                <DropdownMenuSeparator className="border-b border-gray-400" />
-                <DropdownMenuItem
-                  className="hover:bg-gray-200 px-3 py-2 cursor-pointer"
-                  onClick={handleLogOut}
-                >
-                  <LogOut /> LogOut
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </>
-        ) : (
-          <Link href={"/login"}>
-            <Button
-              variant="outline"
-              className="roudend-full btn  cursor-pointer border-0 bg-gray-300 text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ..."
-            >
-              SignIn
-            </Button>
-          </Link>
-        )}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </>
+          ) : (
+            <Link href={"/login"}>
+              <Button
+                variant="outline"
+                className="roudend-full btn  cursor-pointer border-0 bg-gray-300 text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ..."
+              >
+                SignIn
+              </Button>
+            </Link>
+          )}
+        </div>
       </div>
     </div>
   );
