@@ -761,7 +761,7 @@ const HomeComponent = () => {
         )}
       </div>
       {/* =====================================student sayas section====================== */}
-      <div className="container mx-auto px-2 mt-5 md:m-15">
+      <div className="container mx-auto px-2 mt-5 md:my-15">
         <div>
           <h2 className="text-xl md:text-2xl lg:text-4xl text-center md:text-start mb-2 sm:mb-5">
             Our Student <span className="text-pink-500">Says</span>
@@ -791,9 +791,6 @@ const HomeComponent = () => {
                         <p className="text-sm text-gray-600 mt-2 line-clamp-2">
                           {review?.comment}
                         </p>
-                        <div>
-                          <ShowRating RatingShow={review?.rating}></ShowRating>
-                        </div>
                       </CardContent>
                     </Card>
                   </div>

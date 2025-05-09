@@ -140,7 +140,7 @@ export default function Navbar() {
                   {categories?.map((category: any, index: number) => (
                     <li key={index}>
                       <Link
-                        href={`/category/details/${category}`}
+                        href={`/category/${category}`}
                         className={
                           pathname === `/category/details/${category}`
                             ? "text-cyan-600 font-bold underline text-lg"
@@ -221,7 +221,7 @@ export default function Navbar() {
                 {categories?.map((category: any, index: number) => (
                   <li key={index}>
                     <Link
-                      href={`/category/details/${category}`}
+                      href={`/category/${category}`}
                       className={
                         pathname === `/category/details/${category}`
                           ? "text-purple-600 underline text-lg "

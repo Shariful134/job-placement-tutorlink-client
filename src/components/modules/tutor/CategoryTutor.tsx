@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
@@ -74,13 +75,14 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import ShowRating from "../starRating/ShowRating";
+
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import ShowRating from "@/components/modules/starRating/ShowRating";
 import StarRating from "../starRating/StarRating";
 
-const AllTutorComponents = () => {
-  const [tutors, setTutors] = useState<ITutor[] | []>([]);
+const CategoryTutor = ({ categoryId }: { categoryId: string }) => {
+  const [tutorss, setTutors] = useState<ITutor[] | []>([]);
   const [isUser, setIsUser] = useState<ITutor[] | []>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -152,13 +154,14 @@ const AllTutorComponents = () => {
     fetchTutors();
   }, [user]);
 
+  const tutors = tutorss?.filter((tutor) => tutor.category == categoryId);
   useEffect(() => {
     const allSubjects = [
       ...new Set(tutors?.flatMap((tutor) => tutor.subjects)),
     ];
 
     setFilteredSubjects(allSubjects);
-  }, [tutors]);
+  }, [tutorss, categoryId]);
 
   const filteredTutors = tutors?.filter((tutor) => {
     const searchQuery = searchValue.trim().toLowerCase();
@@ -477,6 +480,7 @@ const AllTutorComponents = () => {
                           </Button>
                         </Link>
                       </div>
+
                       {user?.role === "student" && (
                         <div className=" hover:bg-gray-400/25 mx-auto ">
                           <Dialog>
@@ -623,4 +627,4 @@ const AllTutorComponents = () => {
   );
 };
 
-export default AllTutorComponents;
+export default CategoryTutor;
