@@ -97,6 +97,9 @@ const AllTutorComponents = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const { user, ratings } = useUser();
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const tutorsPerPage = 8;
+
   const form = useForm();
 
   useEffect(() => {
@@ -210,14 +213,6 @@ const AllTutorComponents = () => {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="pt-20 flex justify-center">
-        <SkeletonLoading />
-      </div>
-    );
-  }
-
   const handleCategoryChange = (value: string) => {
     setSelectedCategory(value);
 
@@ -268,9 +263,32 @@ const AllTutorComponents = () => {
   const allSubjects = tutors?.map((tutor) => tutor.subjects);
   const uniqueSubjects = [...new Set(allSubjects.flat())];
 
-  console.log(uniqueSubjects);
   const allCategories = tutors?.map((tutor) => tutor.category);
   const categories = [...new Set(allCategories)];
+
+  // paginaton add
+  //  indexes Calculate
+  const indexOfLastTutor = currentPage * tutorsPerPage;
+  const indexOfFirstTutor = indexOfLastTutor - tutorsPerPage;
+  const currentTutors = updatedTutors?.slice(
+    indexOfFirstTutor,
+    indexOfLastTutor
+  );
+
+  const totalPages = Math.ceil(updatedTutors.length / tutorsPerPage);
+
+  useEffect(() => {
+    window.scrollTo({ top: 200, behavior: "smooth" });
+  }, [currentPage]);
+
+  // add skeleton
+  if (loading) {
+    return (
+      <div className="pt-20 flex justify-center">
+        <SkeletonLoading />
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto px-2 mt-10 md:mt-10 overflow-x-hidden">
@@ -376,12 +394,12 @@ const AllTutorComponents = () => {
         <div className="col-span-9 w-full">
           {/* =====================all Tutor========================= */}
           <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-3">
-            {!Array.isArray(updatedTutors) || updatedTutors?.length === 0 ? (
+            {!Array.isArray(currentTutors) || currentTutors?.length === 0 ? (
               <div className="h-[300px] text-black text-xl md:text-3xl">
                 Not Found Tutor Data
               </div>
             ) : (
-              updatedTutors?.map((tutor, index) => (
+              currentTutors?.map((tutor, index) => (
                 <div
                   key={tutor._id || index}
                   className="card bg-base-100 w-[95%] group border border-gray-200 hover:shadow-lg"
@@ -576,6 +594,42 @@ const AllTutorComponents = () => {
                 </div>
               ))
             )}
+          </div>
+          <div className="flex justify-center mt-4 gap-2 items-center">
+            {/* Previous Button */}
+            <button
+              className="px-3 py-1 rounded bg-gray-200 text-black disabled:opacity-50"
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+            >
+              Previous
+            </button>
+
+            {/* Page Numbers */}
+            {Array.from({ length: totalPages }, (_, index) => (
+              <button
+                key={index}
+                className={`px-3 py-1 rounded ${
+                  currentPage === index + 1
+                    ? "bg-indigo-500 text-white"
+                    : "bg-gray-200 text-black"
+                }`}
+                onClick={() => setCurrentPage(index + 1)}
+              >
+                {index + 1}
+              </button>
+            ))}
+
+            {/* Next Button */}
+            <button
+              className="px-3 py-1 rounded bg-gray-200 text-black disabled:opacity-50"
+              onClick={() =>
+                setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+              }
+              disabled={currentPage === totalPages}
+            >
+              Next
+            </button>
           </div>
         </div>
       </div>
