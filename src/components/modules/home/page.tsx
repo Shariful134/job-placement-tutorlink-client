@@ -8,7 +8,6 @@ import nagad from "../../../app/assest/images/Nagad-Logo.wine.png";
 import rocket from "../../../app/assest/images/rocket.png";
 import groupd from "../../../app/assest/images/Groupe.jpg";
 
-
 import { Card, CardContent } from "@/components/ui/card";
 import * as React from "react";
 import {
@@ -62,7 +61,7 @@ export interface ITutor {
 import { Button } from "@/components/ui/button";
 
 import { useEffect, useState } from "react";
-import {  getAllUsers } from "@/services/User";
+import { getAllUsers } from "@/services/User";
 import Link from "next/link";
 import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
 import {
@@ -71,11 +70,7 @@ import {
 } from "@/services/User/ReviewComment";
 import { IReview } from "@/types/review";
 import { useUser } from "@/context/UserContext";
-import {
-  getAllBooking,
-
-  requestBooking,
-} from "@/services/request";
+import { getAllBooking, requestBooking } from "@/services/request";
 import { toast } from "sonner";
 
 import { SkeletonLoading } from "@/components/ui/shared/SkeletonLoading";
@@ -299,7 +294,7 @@ const HomeComponent = () => {
     ...tutor,
     ratings: ratingsMap[tutor._id] || tutor.ratings,
   }));
-  
+
   const allCategories = updatedTutors?.map((tutor) => tutor.category);
   const categories = [...new Set(allCategories)];
 
@@ -342,8 +337,8 @@ const HomeComponent = () => {
           ></Image>
         </div>
       </div>
-      <div>
-        <div className="container mx-auto px-2 flex justify-center items-center bg-gray-200 ">
+      <div className="container mx-auto px-2">
+        <div className="flex justify-center items-center bg-gray-200 ">
           <Image
             src={bkash}
             priority={true}
@@ -782,7 +777,7 @@ const HomeComponent = () => {
       </div>
       {/* =========================ask qs ====================== */}
       <div className="container mx-auto px-2 mt-5 md:mt-15">
-        <div className="flex gap-5">
+        <div className="flex justify-between flex-col md:flex-row">
           <div>
             <h2 className="text-xl md:text-2xl lg:text-4xl  ">
               Frequently Asked <span className="text-pink-500">Questions</span>
