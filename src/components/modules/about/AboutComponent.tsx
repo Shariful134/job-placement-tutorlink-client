@@ -11,8 +11,8 @@ import { reviewsData } from "./studentData";
 
 const AboutComponent = () => {
   return (
-    <div>
-      <div className="flex flex-col md:flex-row mt-0 sm:mt-5 lg:mt-20 gap-5 items-center justify-center">
+    <div className="container mx-auto px-2">
+      <div className=" flex flex-col md:flex-row mt-0 sm:mt-5 lg:mt-5 gap-5 items-center justify-center">
         <div className="max-w-[1000px] text-center sm:text-start">
           <h2 className="text-2xl md:text-3xl lg:text-5xl mt-0 sm:mt-5 ">
             About Our TutorLink

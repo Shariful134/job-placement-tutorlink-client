@@ -97,6 +97,7 @@ import {
 } from "@/components/ui/form";
 import StarRating from "../starRating/StarRating";
 import ShowRating from "../starRating/ShowRating";
+import FeatureSection from "./featured/FeaturedComponent";
 
 const HomeComponent = () => {
   const [tutors, setTutors] = useState<ITutor[] | []>([]);
@@ -775,6 +776,8 @@ const HomeComponent = () => {
           </Carousel>
         </div>
       </div>
+      {/* =========================Pament Secure ====================== */}
+      <FeatureSection></FeatureSection>
       {/* =========================ask qs ====================== */}
       <div className="container mx-auto px-2 mt-5 md:mt-15">
         <div className="flex justify-between flex-col md:flex-row">

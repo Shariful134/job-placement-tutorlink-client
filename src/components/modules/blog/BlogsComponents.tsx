@@ -10,15 +10,6 @@ import { Input } from "@/components/ui/input";
 import { MdDateRange } from "react-icons/md";
 import { SkeletonLoading } from "@/components/ui/shared/SkeletonLoading";
 import { useUser } from "@/context/UserContext";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
 
 const BlogsComponents = () => {
   const [education, setEducation] = useState<NewsArticle[] | []>([]);
@@ -77,6 +68,8 @@ const BlogsComponents = () => {
     item.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  // =================paginaton==========================
+
   if (isLoading)
     return (
       <div className="pt-20 flex justify-center">
@@ -85,7 +78,7 @@ const BlogsComponents = () => {
     );
 
   return (
-    <div className="pb-0 md:pb-5 mt-5">
+    <div className="container mx-auto pb-0 md:pb-5 mt-5">
       <div className="relative">
         <Image
           src={photo}
@@ -232,30 +225,6 @@ const BlogsComponents = () => {
               )}
             </div>
           ))}
-          <Pagination className="mt-5">
-            <PaginationContent>
-              <PaginationItem>
-                <PaginationPrevious href="#" />
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#">1</PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#" isActive>
-                  2
-                </PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#">3</PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationEllipsis />
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationNext href="#" />
-              </PaginationItem>
-            </PaginationContent>
-          </Pagination>
         </div>
         {/* =======================search reslut=============== */}
         <div className="w-full hidden lg:inline lg:w-[30%]  order-3 md:order-2 mt-5">
