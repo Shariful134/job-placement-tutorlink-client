@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
@@ -74,9 +75,10 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import ShowRating from "../starRating/ShowRating";
+
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import ShowRating from "@/components/modules/starRating/ShowRating";
 import StarRating from "../starRating/StarRating";
 
 const AllTutorComponents = () => {
@@ -152,13 +154,14 @@ const AllTutorComponents = () => {
     fetchTutors();
   }, [user]);
 
-  useEffect(() => {
-    const allSubjects = [
-      ...new Set(tutors?.flatMap((tutor) => tutor.subjects)),
-    ];
+  // const tutorsds = tutors?.filter((tutor) => tutor.category == categoryId);
+  // useEffect(() => {
+  //   const allSubjects = [
+  //     ...new Set(tutors?.flatMap((tutor) => tutor.subjects)),
+  //   ];
 
-    setFilteredSubjects(allSubjects);
-  }, [tutors]);
+  //   setFilteredSubjects(allSubjects);
+  // }, [tutors, categoryId]);
 
   const filteredTutors = tutors?.filter((tutor) => {
     const searchQuery = searchValue.trim().toLowerCase();
@@ -261,10 +264,10 @@ const AllTutorComponents = () => {
     ratings: ratingsMap[tutor?._id] || tutor?.ratings,
   }));
 
-  const allSubjects = tutors?.map((tutor) => tutor?.subjects);
+  const allSubjects = tutors?.map((tutor) => tutor.subjects);
   const uniqueSubjects = [...new Set(allSubjects?.flat())];
 
-  const allCategories = tutors?.map((tutor) => tutor?.category);
+  const allCategories = tutors?.map((tutor) => tutor.category);
   const categories = [...new Set(allCategories)];
 
   // paginaton add
@@ -477,6 +480,7 @@ const AllTutorComponents = () => {
                           </Button>
                         </Link>
                       </div>
+
                       {user?.role === "student" && (
                         <div className=" hover:bg-gray-400/25 mx-auto ">
                           <Dialog>
