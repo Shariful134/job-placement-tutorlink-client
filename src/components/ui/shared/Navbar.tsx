@@ -129,7 +129,7 @@ export default function Navbar() {
               <div className="dropdown dropdown-hover">
                 <label
                   tabIndex={0}
-                  className="text-lg cursor-pointer hover:text-cyan-600 flex items-center justify-center"
+                  className="text-lg cursor-pointer hover:text-cyan-600 flex items-center "
                 >
                   Category <RiArrowDropDownLine className=" text-2xl" />
                 </label>

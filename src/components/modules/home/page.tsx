@@ -347,7 +347,7 @@ const HomeComponent = () => {
           ></Image>
         </div>
       </div>
-      <div className="container mx-auto px-2">
+      <div className="container mx-auto px-2 overflow-x-hidden">
         <div className="flex justify-center items-center bg-gray-200 ">
           <Image
             src={bkash}
@@ -375,7 +375,7 @@ const HomeComponent = () => {
 
       {/* =========================category section ========================= */}
       <div>
-        <div className="container mx-auto mt-5 px-2 ">
+        <div className="container mx-auto mt-5 px-2 overflow-x-hidden">
           <h2 className="text-xl md:text-2xl lg:text-4xl text-center md:text-start  mb-5 ">
             Course <span className="text-pink-500">Categories ____</span>
           </h2>
@@ -408,7 +408,7 @@ const HomeComponent = () => {
       </div>
 
       {/* =============================benifit section======================== */}
-      <div className="container mx-auto px-2 flex flex-col-reverse md:flex-row  items-center gap-5 mt-5 md:mt-15">
+      <div className="container mx-auto px-2 flex flex-col-reverse md:flex-row  items-center gap-5 mt-5 md:mt-15 overflow-x-hidden">
         <div className="flex justify-center">
           <Image
             src={groupd}
@@ -761,7 +761,7 @@ const HomeComponent = () => {
         )}
       </div>
       {/* =====================================student sayas section====================== */}
-      <div className="container mx-auto px-2 mt-5 md:mt-15">
+      <div className="container mx-auto px-2 mt-5 md:m-15">
         <div>
           <h2 className="text-xl md:text-2xl lg:text-4xl text-center md:text-start mb-2 sm:mb-5">
             Our Student <span className="text-pink-500">Says</span>

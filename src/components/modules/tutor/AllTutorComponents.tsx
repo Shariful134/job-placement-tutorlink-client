@@ -273,7 +273,7 @@ const AllTutorComponents = () => {
   const categories = [...new Set(allCategories)];
 
   return (
-    <div className="container mx-auto px-2 mt-10 md:mt-10">
+    <div className="container mx-auto px-2 mt-10 md:mt-10 overflow-x-hidden">
       <div>
         {" "}
         <h2 className="text-xl md:text-2xl lg:text-4xl  ">
