@@ -24,6 +24,7 @@ import { useEffect, useState } from "react";
 import { getAllUsers } from "@/services/User";
 import { IUsers } from "@/types";
 import Loading from "./Loading";
+import { RiArrowDropDownLine } from "react-icons/ri";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -51,6 +52,12 @@ export default function Navbar() {
     fetchTutors();
   }, []);
 
+  // ====================category=============================
+  const tutorsData = users?.filter((tutor) => tutor.role == "tutor");
+  const allCategories = tutorsData?.map((tutor) => tutor.category);
+  const categories = [...new Set(allCategories)];
+  // ====================category=============================
+
   const currentUser = users?.find(
     (item: IUsers) => item.email === user?.userEmail
   );
@@ -70,8 +77,8 @@ export default function Navbar() {
   }
 
   return (
-    <div className="bg-gray-200 ">
-      <div className="container mx-auto navbar  pe-7 md:px-10   sticky top-0 z-50 ">
+    <div className="bg-gray-200  sticky top-0 z-50">
+      <div className="container mx-auto navbar  ">
         <div className="navbar-start">
           <div className="dropdown">
             <div
@@ -119,6 +126,33 @@ export default function Navbar() {
               >
                 Tutors
               </Link>
+              <div className="dropdown dropdown-hover">
+                <label
+                  tabIndex={0}
+                  className="text-lg cursor-pointer hover:text-cyan-600 flex items-center justify-center"
+                >
+                  Category <RiArrowDropDownLine className=" text-2xl" />
+                </label>
+                <ul
+                  tabIndex={0}
+                  className="dropdown-content z-[1] menu  shadow bg-base-100 rounded-box w-52"
+                >
+                  {categories?.map((category: any, index: number) => (
+                    <li key={index}>
+                      <Link
+                        href={`/category/details/${category}`}
+                        className={
+                          pathname === `/category/details/${category}`
+                            ? "text-cyan-600 font-bold underline text-lg"
+                            : "hover:text-cyan-600 text-lg"
+                        }
+                      >
+                        {category}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
               <Link
                 className={
                   pathname == "/contact"
@@ -173,6 +207,33 @@ export default function Navbar() {
             >
               Home
             </Link>
+            <div className="dropdown dropdown-hover">
+              <label
+                tabIndex={0}
+                className="text-lg cursor-pointer hover:text-purple-600 flex items-center justify-center"
+              >
+                Category <RiArrowDropDownLine className=" text-2xl" />
+              </label>
+              <ul
+                tabIndex={0}
+                className="dropdown-content z-[1] menu  shadow bg-base-100 rounded-box w-52"
+              >
+                {categories?.map((category: any, index: number) => (
+                  <li key={index}>
+                    <Link
+                      href={`/category/details/${category}`}
+                      className={
+                        pathname === `/category/details/${category}`
+                          ? "text-purple-600 underline text-lg "
+                          : "text-black text-lg hover:text-purple-600 hover:underline"
+                      }
+                    >
+                      {category}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
             <Link
               className={
                 pathname == "/tutors"

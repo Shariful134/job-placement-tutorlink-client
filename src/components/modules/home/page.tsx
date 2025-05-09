@@ -8,11 +8,6 @@ import nagad from "../../../app/assest/images/Nagad-Logo.wine.png";
 import rocket from "../../../app/assest/images/rocket.png";
 import groupd from "../../../app/assest/images/Groupe.jpg";
 
-import computer from "../../../app/assest/images/computer.png";
-import science from "../../../app/assest/images/physics2.jpeg";
-import arts from "../../../app/assest/images/arts.png";
-import math from "../../../app/assest/images/math.jpeg";
-import english from "../../../app/assest/images/english'.jpeg";
 
 import { Card, CardContent } from "@/components/ui/card";
 import * as React from "react";
@@ -40,8 +35,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 
 export interface Availability {
   day: string;
@@ -69,7 +62,7 @@ export interface ITutor {
 import { Button } from "@/components/ui/button";
 
 import { useEffect, useState } from "react";
-import { getAllTutors, getAllUsers } from "@/services/User";
+import {  getAllUsers } from "@/services/User";
 import Link from "next/link";
 import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
 import {
@@ -80,11 +73,11 @@ import { IReview } from "@/types/review";
 import { useUser } from "@/context/UserContext";
 import {
   getAllBooking,
-  getAllBookings,
+
   requestBooking,
 } from "@/services/request";
 import { toast } from "sonner";
-import { TBooking } from "@/types/bookings";
+
 import { SkeletonLoading } from "@/components/ui/shared/SkeletonLoading";
 
 import {
@@ -306,13 +299,14 @@ const HomeComponent = () => {
     ...tutor,
     ratings: ratingsMap[tutor._id] || tutor.ratings,
   }));
+  
   const allCategories = updatedTutors?.map((tutor) => tutor.category);
   const categories = [...new Set(allCategories)];
 
   return (
     <div>
       {/* =============================Banner section=========================== */}
-      <div className="container mx-auto flex flex-col md:flex-row items-center pt-15 md:pt-20">
+      <div className="container mx-auto px-2 flex flex-col md:flex-row items-center pt-15 md:pt-20">
         <div className="pt-5 text-center md:text-start">
           <h2 className="text-2xl md:text-3xl lg:text-5xl  ">
             Learn Better, <span className="text-pink-500">AcademyNest !</span>
@@ -349,7 +343,7 @@ const HomeComponent = () => {
         </div>
       </div>
       <div>
-        <div className="container mx-auto flex justify-center items-center bg-gray-200 ">
+        <div className="container mx-auto px-2 flex justify-center items-center bg-gray-200 ">
           <Image
             src={bkash}
             priority={true}
@@ -376,7 +370,7 @@ const HomeComponent = () => {
 
       {/* =========================category section ========================= */}
       <div>
-        <div className="container mx-auto mt-5  ">
+        <div className="container mx-auto mt-5 px-2 ">
           <h2 className="text-xl md:text-2xl lg:text-4xl text-center md:text-start  mb-5 ">
             Course <span className="text-pink-500">Categories ____</span>
           </h2>
@@ -403,109 +397,13 @@ const HomeComponent = () => {
                   </Link>
                 </Card>
               ))}
-              {/* <Card className="w-[95%] border-gray-200 hover:shadow-2xl">
-                <Link href={"#"}>
-                  <CardContent className="flex flex-col items-center">
-                    <Image
-                      className=""
-                      src={english}
-                      priority={true}
-                      width={100}
-                      height={100}
-                      alt="BannerImg"
-                    ></Image>
-                    <p className="text-sm md:text-sm lg:text-lg  ">Computer</p>
-                    <p className="text-sm md:text-sm lg:text-lg text-gray-700 ">
-                      High School
-                    </p>
-                    <div className="flex gap-1">
-                      <FaStar className="text-yellow-500" />
-                      <FaStar className="text-yellow-500" />
-                      <FaStarHalfAlt className="text-yellow-500" />
-                      <FaRegStar className="text-yellow-500" />
-                    </div>
-                  </CardContent>
-                </Link>
-              </Card>
-              <Card className="w-[95%] border-gray-200 hover:shadow-2xl">
-                <Link href={"#"}>
-                  <CardContent className="flex flex-col items-center">
-                    <Image
-                      className=""
-                      src={math}
-                      priority={true}
-                      width={100}
-                      height={100}
-                      alt="BannerImg"
-                    ></Image>
-                    <p className="text-sm md:text-sm lg:text-lg  ">Computer</p>
-                    <p className="text-sm md:text-sm lg:text-lg text-gray-700 ">
-                      UnderGraduate
-                    </p>
-                    <div className="flex gap-1">
-                      <FaStar className="text-yellow-500" />
-                      <FaStar className="text-yellow-500" />
-                      <FaStarHalfAlt className="text-yellow-500" />
-                      <FaRegStar className="text-yellow-500" />
-                    </div>
-                  </CardContent>
-                </Link>
-              </Card>
-              <Card className="w-[95%] border-gray-200 hover:shadow-2xl">
-                <Link href={"#"}>
-                  <CardContent className="flex flex-col items-center">
-                    <Image
-                      className=""
-                      src={arts}
-                      priority={true}
-                      width={100}
-                      height={100}
-                      alt="BannerImg"
-                    ></Image>
-                    <p className="text-sm md:text-sm lg:text-lg  ">Computer</p>
-                    <p className="text-sm md:text-sm lg:text-lg text-gray-700 ">
-                      UnderGraduate
-                    </p>
-                    <div className="flex gap-1">
-                      <FaStar className="text-yellow-500" />
-                      <FaStar className="text-yellow-500" />
-                      <FaStarHalfAlt className="text-yellow-500" />
-                      <FaRegStar className="text-yellow-500" />
-                    </div>
-                  </CardContent>
-                </Link>
-              </Card>
-              <Card className="w-[95%] border-gray-200 hover:shadow-2xl">
-                <Link href={"#"}>
-                  <CardContent className="flex flex-col items-center">
-                    <Image
-                      className=""
-                      src={science}
-                      priority={true}
-                      width={100}
-                      height={100}
-                      alt="BannerImg"
-                    ></Image>
-                    <p className="text-sm md:text-sm lg:text-lg  ">Computer</p>
-                    <p className="text-sm md:text-sm lg:text-lg text-gray-700 ">
-                      PostGraduate
-                    </p>
-                    <div className="flex gap-1">
-                      <FaStar className="text-yellow-500" />
-                      <FaStar className="text-yellow-500" />
-                      <FaStarHalfAlt className="text-yellow-500" />
-                      <FaRegStar className="text-yellow-500" />
-                    </div>
-                  </CardContent>
-                </Link>
-              </Card> */}
             </div>
           </div>
         </div>
       </div>
 
       {/* =============================benifit section======================== */}
-      <div className="flex flex-col-reverse md:flex-row px-10 md:px-10 items-center gap-5 mt-5 md:mt-15">
+      <div className="container mx-auto px-2 flex flex-col-reverse md:flex-row  items-center gap-5 mt-5 md:mt-15">
         <div className="flex justify-center">
           <Image
             src={groupd}
@@ -543,7 +441,7 @@ const HomeComponent = () => {
       </div>
 
       {/* ====================tutors section========================== */}
-      <div className="px-10 mt-5 md:mt-15">
+      <div className="container px-2 mx-auto mt-5 md:mt-15">
         <div>
           {" "}
           <h2 className="text-xl md:text-2xl lg:text-4xl  ">
@@ -838,7 +736,7 @@ const HomeComponent = () => {
         )}
       </div>
       {/* =====================================student sayas section====================== */}
-      <div className=" px-10 mt-5 md:mt-15">
+      <div className="container mx-auto px-2 mt-5 md:mt-15">
         <div>
           <h2 className="text-xl md:text-2xl lg:text-4xl text-center md:text-start mb-2 sm:mb-5">
             Our Student <span className="text-pink-500">Says</span>
@@ -883,7 +781,7 @@ const HomeComponent = () => {
         </div>
       </div>
       {/* =========================ask qs ====================== */}
-      <div className="px-10 mt-5 md:mt-15">
+      <div className="container mx-auto px-2 mt-5 md:mt-15">
         <div className="flex gap-5">
           <div>
             <h2 className="text-xl md:text-2xl lg:text-4xl  ">
