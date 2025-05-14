@@ -15,7 +15,7 @@ import { useUser } from "@/context/UserContext";
 import { getAllBookings } from "@/services/request";
 import React, { useEffect, useState } from "react";
 
-export function SectionCards() {
+export function TSectionCards() {
   const [allBookings, setAllBookings] = useState<TBooking[] | []>([]);
   const { user } = useUser();
 
@@ -28,9 +28,9 @@ export function SectionCards() {
   }, []);
 
   const currentBookings = allBookings?.filter(
-    (item: any) => item?.student?.email === user?.userEmail
+    (item: any) => item?.tutor?.email === user?.userEmail
   );
-  console.log("currentBookings:", currentBookings);
+  console.log("currentBookingsss:", currentBookings);
   const paidBookings = currentBookings.filter((item) => item.status === "Paid");
 
   const totalRevenue = paidBookings.reduce(
@@ -41,7 +41,11 @@ export function SectionCards() {
   const totalOrders = paidBookings.length;
 
   const totalRequests = currentBookings.filter(
-    (item) => item.bookingRequest === true && item.status !== "Paid"
+    (item) => item.bookingRequest === true
+  ).length;
+
+  const accepteRequests = currentBookings.filter(
+    (item) => item.bookingRequest === false
   ).length;
 
   return (
@@ -104,10 +108,10 @@ export function SectionCards() {
       <Card className="bg-white dark:bg-gray-900 shadow-md">
         <CardHeader>
           <CardDescription className="text-gray-500 dark:text-gray-400">
-            Booking Requests
+            Requests Accepted
           </CardDescription>
           <CardTitle className="text-2xl font-semibold tabular-nums text-gray-900 dark:text-gray-100">
-            {totalRequests}
+            {accepteRequests}
           </CardTitle>
           <Badge
             variant="outline"
@@ -129,10 +133,10 @@ export function SectionCards() {
       <Card className="bg-white dark:bg-gray-900 shadow-md">
         <CardHeader>
           <CardDescription className="text-gray-500 dark:text-gray-400">
-            Growth Rate
+            Total Requests
           </CardDescription>
           <CardTitle className="text-2xl font-semibold tabular-nums text-gray-900 dark:text-gray-100">
-            4.5%
+            {totalRequests}
           </CardTitle>
           <Badge
             variant="outline"
@@ -144,9 +148,8 @@ export function SectionCards() {
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1.5 text-sm text-gray-600 dark:text-gray-300">
           <div className="line-clamp-1 flex gap-2 font-medium">
-            Steady performance increase <IconTrendingUp className="size-4" />
+            Total requeted for booking <IconTrendingUp className="size-4" />
           </div>
-          <div className="text-muted-foreground">Meets growth projections</div>
         </CardFooter>
       </Card>
     </div>

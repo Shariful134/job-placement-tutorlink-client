@@ -7,7 +7,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { useReactToPrint } from "react-to-print";
 
-import logo from "../../../app/assest/images/tutorlin-logo.png";
+import logo from "../../../app/assest/images/tutorlogo.png";
 import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Loading from "@/components/ui/shared/Loading";
@@ -33,6 +33,7 @@ const VerifyBookingComponent = () => {
         setIsLoading(false);
       } catch (error) {
         console.log(error);
+        setIsLoading(false);
       }
     };
     fetchData();
@@ -40,18 +41,19 @@ const VerifyBookingComponent = () => {
 
   if (isLoading) {
     return (
-      <div className="pt-20 flex justify-center">
+      <div className="min-h-screen flex justify-center items-center">
         <Loading />
       </div>
     );
   }
+
   return (
-    <div className="px-10 ">
+    <div className="px-4 sm:px-10 py-6 text-black dark:text-white transition-colors duration-300">
       <div
         ref={contentRef}
-        className="w-[240px] sm:w-[550px] max-w-[793px] bg-gray-100/50 p-5 pt-10 mx-auto"
+        className="w-full sm:max-w-3xl lg:max-w-[793px] bg-gray-100 dark:bg-gray-900 rounded-md p-5 pt-10 mx-auto shadow-md transition-colors duration-300"
       >
-        <div className="flex justify-between ">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
             <Image
               width={80}
@@ -60,65 +62,72 @@ const VerifyBookingComponent = () => {
               src={logo}
               alt="logo"
               className="hidden sm:inline"
-            ></Image>
+            />
           </div>
           <div className="text-end">
-            <h3 className="text-cyan-600 text-2xl">AcademyNest </h3>
+            <h3 className="text-cyan-600 text-xl sm:text-2xl">AcademyNest</h3>
             <p className="text-xs sm:text-sm">
-              Haque Tower,10th Floor JA-28/8/D,Mohakhali C/A Dhaka
+              Haque Tower, 10th Floor JA-28/8/D, Mohakhali C/A Dhaka
             </p>
             <p className="text-xs sm:text-sm">(+880) 964-3207001</p>
             <p className="text-xs sm:text-sm">(+880) 1885-022022</p>
             <p className="text-xs sm:text-sm">info@shurjopay.com.bd</p>
           </div>
         </div>
-        <hr className="text-gray-400 my-2" />
+
+        <hr className="my-4 border-gray-300 dark:border-gray-700" />
+
         {bookingData?.map((booking, index) => (
           <div key={index}>
-            <div className="flex flex-col md:flex-row justify-between ">
-              <div className=" sm:text-start mb-2 sm:mb-0">
-                <h3 className="text-sm sm:text-lg ">Invoice To: </h3>
-                <p className=" text-xs sm:text-md ">{booking.name}</p>
+            <div className="flex flex-col md:flex-row justify-between gap-4 mb-5">
+              <div className="sm:text-start">
+                <h3 className="text-sm sm:text-lg font-semibold">
+                  Invoice To:
+                </h3>
+                <p className="text-xs sm:text-sm">{booking.name}</p>
                 <p className="text-xs sm:text-sm">{booking.address}</p>
                 <p className="text-xs sm:text-sm text-cyan-600">
                   {booking.email}
                 </p>
               </div>
               <div className="text-end">
-                <h3 className="text-xs sm:text-2xl text-cyan-600 ">
-                  INVOICE No: {booking.invoice_no}{" "}
+                <h3 className="text-xs sm:text-2xl text-cyan-600 font-semibold">
+                  INVOICE No: {booking.invoice_no}
                 </h3>
                 <p className="text-xs sm:text-sm">Date: {booking.date_time}</p>
               </div>
             </div>
+
+            {/* Payment Summary */}
             <div className="mt-5">
-              <div className="text-xs sm:text-sm border-b-1 border-b-white text-center bg-gray-100 py-2  w-full">
-                <p>PAYMENT SUMMERY</p>
+              <div className="text-xs sm:text-sm text-center font-medium bg-gray-200 dark:bg-gray-800 py-2 rounded-t-md">
+                PAYMENT SUMMARY
               </div>
-              <div className=" grid grid-cols-2 sm:grid-cols-4 px-2 text-xs sm:text-sm border-b-1 border-b-white bg-gray-100 py-2  w-full">
+              <div className="grid grid-cols-2 sm:grid-cols-4 px-2 text-xs sm:text-sm bg-gray-100 dark:bg-gray-800 py-2">
                 <p>Payment Status:</p>
                 <p>{booking.bank_status}</p>
                 <p>Method:</p>
                 <p>{booking.method}</p>
               </div>
-              <div className=" grid grid-cols-2 sm:grid-cols-4 px-2 text-xs sm:text-sm border-b-1 border-b-white bg-gray-100 py-2  w-full">
+              <div className="grid grid-cols-2 sm:grid-cols-4 px-2 text-xs sm:text-sm bg-gray-100 dark:bg-gray-800 py-2">
                 <p>Amount:</p>
                 <p>{booking.amount} BDT</p>
                 <p>Currency:</p>
                 <p>{booking.currency}</p>
               </div>
-              <div className=" grid grid-cols-2 sm:grid-cols-4 px-2 text-xs sm:text-sm border-b-1 border-b-white bg-gray-100 py-2  w-full">
-                <p>Card_number:</p>
-                <p>{booking.card_number} BDT</p>
+              <div className="grid grid-cols-2 px-2 text-xs sm:text-sm bg-gray-100 dark:bg-gray-800 py-2 rounded-b-md">
+                <p>Card Number:</p>
+                <p>{booking.card_number}</p>
               </div>
             </div>
-            <div>
-              <p className="text-end text-xs sm:text-sm">
-                SubTotal:{booking.amount} BDT
-              </p>{" "}
-              <p className="text-start mt-5 text-xs sm:text-sm">Thank you!</p>{" "}
-              <p className="text-start text-xs sm:text-sm">NOTICE:</p>{" "}
-              <p className="text-start text-xs sm:text-sm">
+
+            <div className="mt-4">
+              <p className="text-end text-xs sm:text-sm font-semibold">
+                Subtotal: {booking.amount} BDT
+              </p>
+              <p className="mt-5 text-xs sm:text-sm">Thank you!</p>
+              <p className="text-xs sm:text-sm font-semibold">NOTICE:</p>
+              <p className="text-xs sm:text-sm">
                 A finance charge of 1.5 to 3% will be made on unpaid balances
                 after 7 working days.
               </p>
@@ -126,11 +135,12 @@ const VerifyBookingComponent = () => {
           </div>
         ))}
       </div>
-      <div className="text-center max-w-3xl mx-auto">
+
+      <div className="text-center max-w-3xl mx-auto mt-6">
         <Button
           onClick={() => reactToPrintFn()}
           variant="outline"
-          className="roudend-full cursor-pointer border-0 bg-gray-300 text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ..."
+          className="rounded-full cursor-pointer border-0 text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:opacity-90 transition"
         >
           Download
         </Button>

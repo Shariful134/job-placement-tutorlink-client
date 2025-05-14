@@ -141,68 +141,77 @@ const BookingsComponent = ({ tutorId }: { tutorId: string }) => {
 
   if (loading) {
     return (
-      <div className="pt-20 flex justify-center">
+      <div className="min-h-screen flex justify-center items-center">
         <SkeletonLoading />
       </div>
     );
   }
   return (
     <div className="flex flex-col md:flex-row px-10 gap-5 justify-center mb-15">
-      <div className="pt-5 p-5 shadow-2xl">
+      <div className="pt-5 p-5 shadow-sm bg-white text-gray-900 dark:bg-gray-800 dark:text-white transition-colors duration-300">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
-            <div className="grid grid-cols-1  gap-2">
+            <div className="grid grid-cols-1 gap-2">
+              {/* Address */}
               <FormField
                 control={form.control}
                 name="address"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Address</FormLabel>
+                    <FormLabel className="text-gray-900 dark:text-white">
+                      Address
+                    </FormLabel>
                     <FormControl>
                       <Input
                         type="text"
-                        className="border border-gray-400 "
+                        className="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500"
                         {...field}
                         value={field.value || ""}
                       />
                     </FormControl>
-
                     <FormMessage className="text-red-500" />
                   </FormItem>
                 )}
               />
+
+              {/* Phone */}
               <FormField
                 control={form.control}
                 name="phone"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Phone</FormLabel>
+                    <FormLabel className="text-gray-900 dark:text-white">
+                      Phone
+                    </FormLabel>
                     <FormControl>
                       <Input
                         type="text"
-                        className="border border-gray-400 "
+                        className="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500"
                         {...field}
                         value={field.value || ""}
                       />
                     </FormControl>
-
                     <FormMessage className="text-red-500" />
                   </FormItem>
                 )}
               />
+
+              {/* Date */}
               <FormField
                 control={form.control}
                 name="dateTime"
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
-                    <FormLabel>Date</FormLabel>
+                    <FormLabel className="text-gray-900 dark:text-white">
+                      Date
+                    </FormLabel>
                     <Popover>
                       <PopoverTrigger asChild>
                         <FormControl>
                           <Button
                             variant={"outline"}
                             className={cn(
-                              "border-gray-400 pl-3 text-left font-normal",
+                              "border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-left font-normal text-gray-900 dark:text-white pl-3",
                               !field.value && "text-muted-foreground"
                             )}
                           >
@@ -216,12 +225,11 @@ const BookingsComponent = ({ tutorId }: { tutorId: string }) => {
                         </FormControl>
                       </PopoverTrigger>
                       <PopoverContent
-                        className="w-auto p-0 bg-white border-gray-400"
+                        className="dark:text-gray-300 w-auto p-0 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600"
                         align="start"
                       >
                         <Calendar
                           mode="single"
-                          // selected={field.value}
                           onSelect={field.onChange}
                           disabled={(date) =>
                             date > new Date() || date < new Date("1900-01-01")
@@ -230,21 +238,24 @@ const BookingsComponent = ({ tutorId }: { tutorId: string }) => {
                         />
                       </PopoverContent>
                     </Popover>
-                    <FormDescription></FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+
+              {/* Duration */}
               <FormField
                 control={form.control}
                 name="duration"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Duration (hr)</FormLabel>
+                    <FormLabel className="text-gray-900 dark:text-white">
+                      Duration (hr)
+                    </FormLabel>
                     <FormControl>
                       <Input
                         type="number"
-                        className="border border-gray-400"
+                        className="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500"
                         {...field}
                         onChange={(e) => {
                           const value = Number(e.target.value);
@@ -254,97 +265,116 @@ const BookingsComponent = ({ tutorId }: { tutorId: string }) => {
                         value={field.value || ""}
                       />
                     </FormControl>
-
                     <FormMessage className="text-red-500" />
                   </FormItem>
                 )}
               />
+
+              {/* Total Price */}
               <FormField
                 control={form.control}
                 name="totalPrice"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>TotalPrice $</FormLabel>
+                    <FormLabel className="text-gray-900 dark:text-white">
+                      Total Price $
+                    </FormLabel>
                     <FormControl>
                       <Input
                         type="number"
-                        className="border border-gray-400 "
+                        className="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500"
                         {...field}
                         value={field.value || ""}
                       />
                     </FormControl>
-
                     <FormMessage className="text-red-500" />
                   </FormItem>
                 )}
               />
             </div>
-            <div className="w-full flex flex-grow flex-col space-y-1  mt-2">
+
+            {/* Submit Button */}
+            <div className="w-full flex flex-grow flex-col space-y-1 mt-2">
               <Button
                 disabled={!currentBookingStudent?.bookingRequest}
-                className=" cursor-pointer border-0 hover:border btn bg-gray-300 text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ..."
+                className="cursor-pointer border-0 hover:border bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white"
                 type="submit"
               >
                 {isSubmitting ? "Booking..." : "Booking Confirm"}
               </Button>
-              {currentBookingStudent
-                ? !currentBookingStudent?.bookingRequest && (
-                    <p className="text-red-600 text-sm ">
-                      Please Wait for the Tutor Approval
-                    </p>
-                  )
-                : currentBookingStudent === null && (
-                    <p className="text-red-600 text-sm ">
-                      Please Send a Request to This Tutor
-                    </p>
-                  )}
+
+              {/* Conditional messages */}
+              {currentBookingStudent ? (
+                !currentBookingStudent?.bookingRequest && (
+                  <p className="text-red-500 text-sm">
+                    Please Wait for the Tutor Approval
+                  </p>
+                )
+              ) : currentBookingStudent === null ? (
+                <p className="text-red-500 text-sm">
+                  Please Send a Request to This Tutor
+                </p>
+              ) : null}
             </div>
           </form>
         </Form>
       </div>
+
       <div>
-        <div className=" p-5 card bg-base-100 mx-auto min-w-[70%] max-w-4xl h-full flex flex-col md:flex-row justify-center items-center shadow-xl">
-          <div className="flex flex-col justify-center">
+        <div className="p-5 card bg-white text-black dark:bg-gray-900 dark:text-white mx-auto min-w-[70%] max-w-4xl h-full flex flex-col md:flex-row justify-center items-center shadow-sm transition-colors duration-300">
+          <div className="flex flex-col justify-center items-center">
             <Image
               src={tutor?.profileImage || "/default-profile.png"}
               width={300}
               height={200}
               alt={tutor?.name || "Tutor Profile"}
               className="rounded-md"
-            ></Image>
-            <span className="text-sm text-center">{tutor?.email}</span>
-            <div className="flex gap-1 text-sm md:text-sm lg:text-lg justify-center text-gray-700">
-              <FaStar className="text-yellow-500" />
-              <FaStar className="text-yellow-500" />
-              <FaStarHalfAlt className="text-yellow-500" />
-              <FaRegStar className="text-yellow-500" />
+            />
+            <span className="text-sm text-center text-gray-600 dark:text-gray-400">
+              {tutor?.email}
+            </span>
+            <div className="flex gap-1 text-sm md:text-sm lg:text-lg justify-center text-yellow-500 mt-1">
+              <FaStar />
+              <FaStar />
+              <FaStarHalfAlt />
+              <FaRegStar />
             </div>
           </div>
+
           <div className="card-body ps-0 sm:ps-5">
-            <div className="flex justify-center items-center">
-              <h2 className="card-title text-xl ">{tutor?.name} </h2>
-              <p className=" text-sm md:text-sm  text-gray-700 ">
-                ( {tutor?.gradeLevel})
+            <div className="flex justify-center items-center gap-2">
+              <h2 className="card-title text-xl">{tutor?.name}</h2>
+              <p className="text-sm text-gray-600 dark:text-gray-300">
+                ( {tutor?.gradeLevel} )
               </p>
             </div>
-            <p className=" text-sm md:text-sm lg:text-lg text-gray-700 ">
-              <span className="text-gray-900">Subject: </span>{" "}
+
+            <p className="text-sm md:text-sm lg:text-lg text-gray-700 dark:text-gray-300">
+              <span className="font-semibold dark:text-white">Subject:</span>{" "}
               {tutor?.subjects?.join(", ")}
             </p>
-            <p className=" text-sm md:text-sm lg:text-lg text-gray-700 ">
-              <span className="text-gray-900">HourlyRatelity:</span>{" "}
+
+            <p className="text-sm md:text-sm lg:text-lg text-gray-700 dark:text-gray-300">
+              <span className="font-semibold dark:text-white">
+                Hourly Rate:
+              </span>{" "}
               {tutor?.hourlyRate} $
             </p>
-            <p className=" text-sm md:text-sm lg:text-lg text-gray-700 ">
-              Category: {tutor?.category}
+
+            <p className="text-sm md:text-sm lg:text-lg text-gray-700 dark:text-gray-300">
+              <span className="font-semibold dark:text-white">Category:</span>{" "}
+              {tutor?.category}
             </p>
 
-            <p className=" text-sm md:text-sm lg:text-lg text-gray-700 ">
-              Phone: {tutor?.phoneNumber}
+            <p className="text-sm md:text-sm lg:text-lg text-gray-700 dark:text-gray-300">
+              <span className="font-semibold dark:text-white">Phone:</span>{" "}
+              {tutor?.phoneNumber}
             </p>
 
-            <p className=" text-sm md:text-sm lg:text-lg text-gray-700 ">
-              <span className="text-gray-900"> Avilability:</span>{" "}
+            <p className="text-sm md:text-sm lg:text-lg text-gray-700 dark:text-gray-300">
+              <span className="font-semibold dark:text-white">
+                Availability:
+              </span>{" "}
               {tutor?.availability
                 ?.map(
                   (avail: { day: string; time: string }) =>
@@ -352,35 +382,27 @@ const BookingsComponent = ({ tutorId }: { tutorId: string }) => {
                 )
                 .join(", ")}
             </p>
-            <p className=" text-sm md:text-sm lg:text-lg text-gray-700 ">
-              <span className="text-gray-900">Details: {tutor?.bio}</span>{" "}
+
+            <p className="text-sm md:text-sm lg:text-lg text-gray-700 dark:text-gray-300">
+              <span className="font-semibold dark:text-white">Details:</span>{" "}
+              {tutor?.bio}
             </p>
-            {/* <div className="card-actions justify-between items-center">
-                        <p>
-                          <span className="text-sm md:text-sm lg:text-lg text-gray-700">
-                            ${tutor.hourlyRate}
-                          </span>{" "}
-                          hr
-                        </p>
-                        <div className="flex gap-1 text-sm md:text-sm lg:text-lg text-gray-700">
-                          <FaStar className="text-yellow-500" />
-                          <FaStar className="text-yellow-500" />
-                          <FaStarHalfAlt className="text-yellow-500" />
-                          <FaRegStar className="text-yellow-500" />
-                        </div>
-                      </div> */}
-            {/* <div className="card-actions justify-between items-center">
-                  <Link href={`/tutors/${tutor._id}`}>
-                    <Button className="roudend-ful cursor-pointer hover:text-gray-900 border-0 bg-gray-300 text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ...">
-                      Home
-                    </Button>
-                  </Link>
-                  <Link href={"/#"}>
-                    <Button className="roudend-ful cursor-pointer hover:text-gray-900 border-0 bg-gray-300 text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ...">
-                      Booking
-                    </Button>
-                  </Link>
-                </div> */}
+
+            {/* Optional Action Buttons */}
+            {/*
+    <div className="card-actions justify-between items-center mt-4">
+      <Link href={`/tutors/${tutor._id}`}>
+        <Button className="rounded-full cursor-pointer hover:text-gray-900 border-0 bg-gray-200 text-black dark:bg-gradient-to-r dark:from-indigo-500 dark:via-purple-500 dark:to-pink-500 dark:text-white">
+          Home
+        </Button>
+      </Link>
+      <Link href={"/#"}>
+        <Button className="rounded-full cursor-pointer hover:text-gray-900 border-0 bg-gray-200 text-black dark:bg-gradient-to-r dark:from-indigo-500 dark:via-purple-500 dark:to-pink-500 dark:text-white">
+          Booking
+        </Button>
+      </Link>
+    </div>
+    */}
           </div>
         </div>
       </div>

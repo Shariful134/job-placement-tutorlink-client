@@ -1,10 +1,10 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -14,11 +14,9 @@ import { Input } from "@/components/ui/input";
 
 import Link from "next/link";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginUser } from "@/services/authService";
 import { toast } from "sonner";
-
 import { useRouter, useSearchParams } from "next/navigation";
 import { loginSchema } from "./loginValidation";
 import { useUser } from "@/context/UserContext";
@@ -37,11 +35,9 @@ const LoginForm = () => {
   const { setIsLoading } = useUser();
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data);
     try {
       const res = await loginUser(data);
       setIsLoading(true);
-      console.log(res);
       if (res?.success) {
         toast.success(res?.message);
         if (redirect) {
@@ -54,69 +50,83 @@ const LoginForm = () => {
       console.log(error);
     }
   };
-  return (
-    <div className="border border-gray-300 w-full flex-grow  max-w-md p-5 rounded">
-      <div className="flex items-center justify-center space-x-2 pb-2">
-        <h1 className="font-semibold text-xl">Login</h1>
-        <p className="text-sm text-extralight text-gray-600"> Wlcome back</p>
-      </div>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input
-                    className="border border-gray-400"
-                    {...field}
-                    value={field.value || ""}
-                  />
-                </FormControl>
-                <FormDescription />
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <Input
-                    className="border border-gray-400"
-                    type="password"
-                    {...field}
-                    value={field.value || ""}
-                  />
-                </FormControl>
-                <FormDescription />
-                <FormMessage />
-              </FormItem>
-            )}
-          />
 
-          <div className="w-full flex flex-grow flex-col space-y-1">
+  return (
+    <div className="min-h-screen flex items-center justify-center  p-4">
+      <div className="bg-white dark:bg-gray-900 text-gray-800 dark:text-white rounded-xl shadow-lg w-full max-w-md p-6">
+        <div className="text-center mb-4">
+          <h1 className="text-2xl font-bold">Login to Your Account</h1>
+          <p className="text-sm text-gray-600 dark:text-gray-300">
+            Welcome back! Please enter your credentials
+          </p>
+        </div>
+
+        {/* DEMO CREDENTIALS */}
+        <div className="mb-4 p-3 bg-gray-100 dark:bg-gray-800 rounded-md">
+          <p className="text-sm text-gray-700 dark:text-gray-300 font-medium">
+            <strong>Demo Email:</strong> shariful@gmail.com
+          </p>
+          <p className="text-sm text-gray-700 dark:text-gray-300 font-medium">
+            <strong>Demo Password:</strong> Shariful!23
+          </p>
+        </div>
+
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      value={field.value || ""}
+                      className="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700"
+                      placeholder="Enter your email"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Password</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="password"
+                      {...field}
+                      value={field.value || ""}
+                      className="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700"
+                      placeholder="Enter your password"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
             <Button
-              className="roudend-full cursor-pointer border-0 bg-gray-300 text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ..."
               type="submit"
+              className="w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white font-semibold py-2 rounded hover:opacity-90 transition"
             >
-              {isSubmitting ? "Loging..." : "login"}
+              {isSubmitting ? "Logging in..." : "Login"}
             </Button>
-            <p className="text-sm text-extralight text-gray-600">
-              {" "}
-              Do not have an account?{" "}
-              <Link className="text-cyan-500" href="/register">
+
+            <p className="text-sm text-center text-gray-600 dark:text-gray-400 mt-2">
+              Don't have an account?{" "}
+              <Link href="/register" className="text-cyan-400 hover:underline">
                 Register
               </Link>
             </p>
-          </div>
-        </form>
-      </Form>
+          </form>
+        </Form>
+      </div>
     </div>
   );
 };

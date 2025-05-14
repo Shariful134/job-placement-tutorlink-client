@@ -288,7 +288,7 @@ const CategoryTutor = ({ categoryId }: { categoryId: string }) => {
   // add skeleton
   if (loading) {
     return (
-      <div className="pt-20 flex justify-center">
+      <div className="min-h-screen flex justify-center items-center">
         <SkeletonLoading />
       </div>
     );
@@ -298,10 +298,10 @@ const CategoryTutor = ({ categoryId }: { categoryId: string }) => {
     <div className="container mx-auto px-2 mt-10 md:mt-10 overflow-x-hidden">
       <div>
         {" "}
-        <h2 className="text-xl md:text-2xl lg:text-4xl  ">
+        <h2 className="text-xl md:text-2xl lg:text-4xl dark:text-gray-300 ">
           Tutors of <span className="text-pink-500">e_Learn Tutorlink</span>
         </h2>
-        <p className="text-sm md:text-sm lg:text-lg text-gray-700 mt-4 max-w-3xl pb-1 md:pb-5">
+        <p className="dark:text-gray-300 text-sm md:text-sm lg:text-lg text-gray-700 mt-4 max-w-3xl pb-1 md:pb-5">
           Looking for the best tutors? TutorLink 🎓 connects students with
           expert tutors for personalized learning. Find tutors by subject,
           grade, or expertise and book sessions effortlessly. Learn smarter,
@@ -316,16 +316,21 @@ const CategoryTutor = ({ categoryId }: { categoryId: string }) => {
               type="text"
               onChange={(e) => setSearchValue(e.currentTarget.value)}
               placeholder="Search for tutors"
-              className="w-full min-h-[37px] rounded-md border border-gray-400 px-5  text-sm md:text-sm lg:text-lg text-gray-700"
+              className="dark:text-gray-300 w-full min-h-[37px] rounded-md border border-gray-400 px-5  text-sm md:text-sm lg:text-lg text-gray-700"
             />
           </div>
           <div>
-            <h2 className="text-base lg:text-lg">Price Range</h2>
+            <h2 className="text-base lg:text-lg dark:text-gray-300">
+              Price Range
+            </h2>
             <Select onValueChange={handlePriceChange}>
-              <SelectTrigger className="w-full rounded-md border border-gray-400 mb-4">
-                <SelectValue placeholder="Select Price" />
+              <SelectTrigger className=" dark:text-gray-300 w-full rounded-md border border-gray-400 mb-4">
+                <SelectValue
+                  className="dark:text-gray-300"
+                  placeholder="Select Price"
+                />
               </SelectTrigger>
-              <SelectContent className="bg-white rounded-md border border-gray-400">
+              <SelectContent className="bg-white dark:bg-black dark:text-gray-300 rounded-md border border-gray-400">
                 <SelectGroup>
                   <SelectLabel className="w-full">HourlyRate</SelectLabel>
                   <SelectItem value="All">All</SelectItem>
@@ -348,16 +353,24 @@ const CategoryTutor = ({ categoryId }: { categoryId: string }) => {
                   defaultValue="All"
                   value={selectedCategory}
                   onValueChange={(value) => setSelectedCategory(value)}
-                  className="space-y-2"
+                  className="dark:text-gray-300 space-y-2"
                 >
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="All" id="all" />
+                    <RadioGroupItem
+                      className="dark:text-gray-300"
+                      value="All"
+                      id="all"
+                    />
                     <Label htmlFor="all">All Categories</Label>
                   </div>
 
                   {categories.map((category, index) => (
                     <div key={index} className="flex items-center space-x-2">
-                      <RadioGroupItem value={category} id={category} />
+                      <RadioGroupItem
+                        className="dark:text-gray-300"
+                        value={category}
+                        id={category}
+                      />
                       <Label htmlFor={category}>{category}</Label>
                     </div>
                   ))}
@@ -371,7 +384,7 @@ const CategoryTutor = ({ categoryId }: { categoryId: string }) => {
                   defaultValue="All"
                   value={selectedSubject}
                   onValueChange={handleSubjectChange}
-                  className="space-y-2 mt-4"
+                  className=" dark:text-gray-300 space-y-2 mt-4"
                 >
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="All" id="all-subjects" />
@@ -397,7 +410,7 @@ const CategoryTutor = ({ categoryId }: { categoryId: string }) => {
         </div>
         <div className="col-span-9 w-full">
           {/* =====================all Tutor========================= */}
-          <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-3">
+          <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
             {!Array.isArray(currentTutors) || currentTutors?.length === 0 ? (
               <div className="h-[300px] text-black text-xl md:text-3xl">
                 Not Found Tutor Data
@@ -406,180 +419,170 @@ const CategoryTutor = ({ categoryId }: { categoryId: string }) => {
               currentTutors?.map((tutor, index) => (
                 <div
                   key={tutor._id || index}
-                  className="card bg-base-100 w-[95%] group border border-gray-200 hover:shadow-lg"
+                  className="relative group bg-base-100 dark:bg-black border border-gray-300 dark:border-gray-700 rounded-md overflow-x-hidden hover:shadow-sm transition duration-300"
                 >
-                  <figure className="relative h-[100%]">
+                  {/* Image & Hover Button */}
+                  <figure className="relative w-full h-48 overflow-hidden">
                     <Image
-                      className="h-[100%]"
+                      className="w-full h-full object-cover"
                       src={tutor?.profileImage}
-                      priority={true}
                       width={1100}
                       height={650}
-                      alt="BannerImg"
-                    ></Image>
+                      alt="Tutor Image"
+                      priority
+                    />
                     <Link
-                      className="roudend-ful w-full absolute text-center py-1 lg:py-2 bottom-0 lg:bottom-1/2 left-0 lg:translate-y-1/2 opacity-100 lg:opacity-0 group-hover:opacity-100 cursor-pointer hover:text-gray-900 border-0 bg-gray-300 text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
                       href={`/tutors/${tutor._id}`}
+                      className="absolute bottom-0 left-0 w-full py-2 text-center text-white text-sm md:text-base font-medium bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition duration-300"
                     >
-                      Details
+                      View Profile
                     </Link>
                   </figure>
-                  <div className="card-body">
-                    <h2 className="card-title text-sm md:text-lg xl:text-xl">
+
+                  {/* Content */}
+                  <div className="p-3 space-y-1">
+                    <h2 className="font-semibold text-base md:text-lg dark:text-gray-300">
                       {tutor.name}
                     </h2>
-                    <p className=" text-sm md:text-sm lg:text-lg text-gray-700 ">
+                    <p className="text-sm text-gray-600 dark:text-gray-300">
                       {tutor.category}
                     </p>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      ${tutor.hourlyRate} / hr
+                    </p>
 
-                    <div className="card-actions flex-col ">
-                      <p>
-                        <span className="text-sm md:text-sm lg:text-lg text-gray-700">
-                          ${tutor.hourlyRate}
-                        </span>{" "}
-                        hr
-                      </p>
-
-                      <div className="flex items-center gap-1">
-                        <p className="max-w-[80px] ">
-                          Review ( {tutor?.ratings?.length} )
-                        </p>
-                        <ShowRating RatingShow={tutor?.ratings[0]}></ShowRating>
-                      </div>
-                    </div>
-
-                    <div className=" grid gap-3 grid-cols-12">
-                      <div className="col-span-6 xl:col-span-4">
-                        {user?.role === "student" && (
-                          <div className="flex flex-col lg-flex-row justify-between items-center gap-8">
-                            <div className="w-full">
-                              {acceptedTutors?.includes(tutor?._id) ? (
-                                <Button className="roudend-ful w-full cursor-pointer hover:text-gray-900 border-0 bg-gray-300 text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
-                                  Accpted
-                                </Button>
-                              ) : requestedTutors?.includes(tutor?._id) ? (
-                                <Button className="roudend-ful w-full cursor-pointer hover:text-gray-900 border-0 bg-gray-300 text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
-                                  Request
-                                </Button>
-                              ) : (
-                                <Button
-                                  onClick={() => handleRequest(tutor?._id)}
-                                  className="roudend-ful w-full cursor-pointer hover:text-gray-900 border-0 bg-gray-300 text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
-                                >
-                                  Add
-                                </Button>
-                              )}
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                      <div className="col-span-6 xl:col-span-4">
-                        <Link href={`/booking/${tutor?._id}`}>
-                          <Button className="roudend-ful w-full cursor-pointer hover:text-gray-900 border-0 bg-gray-300 text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
-                            Booking
-                          </Button>
-                        </Link>
-                      </div>
-
-                      {user?.role === "student" && (
-                        <div className=" hover:bg-gray-400/25 mx-auto ">
+                    {user?.role === "student" ? (
+                      <div className="flex justify-between items-center text-sm">
+                        <div>
                           <Dialog>
                             <DialogTrigger asChild>
-                              <Button className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white w-full">
-                                <MessageSquareMore />
-                              </Button>
+                              {/* <Button className="w-full py-1 text-sm bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white flex items-center justify-center gap-1">
+                                  <MessageSquareMore className="w-4 h-4" />{" "}
+                                  Comment
+                                </Button> */}
+                              <span className="underline cursor-pointer dark:text-gray-300">
+                                Write Review{" "}
+                                <span className="no-underline">
+                                  {" "}
+                                  ({tutor?.ratings?.length})
+                                </span>
+                              </span>
                             </DialogTrigger>
-                            <DialogContent className="sm:max-w-[425px] max-h-[500px] bg-white">
+                            <DialogContent className="bg-white dark:bg-black max-h-[90vh] overflow-y-auto">
                               <DialogHeader>
-                                <DialogTitle></DialogTitle>
-                                <DialogDescription></DialogDescription>
+                                <DialogTitle className="text-xl dark:text-gray-300">
+                                  Write a Review
+                                </DialogTitle>
                               </DialogHeader>
+
                               <Form {...form}>
                                 <form onSubmit={form.handleSubmit(onSubmit)}>
-                                  <div className="grid grid-cols-1  gap-2">
-                                    <FormField
-                                      control={form.control}
-                                      name="comment"
-                                      render={({ field }) => (
-                                        <FormItem>
-                                          <FormLabel>Your opinion</FormLabel>
-                                          <FormControl>
-                                            <Textarea
-                                              {...field}
-                                              value={field.value || ""}
-                                            ></Textarea>
-                                          </FormControl>
-                                          <FormMessage className="text-red-500" />
-                                        </FormItem>
-                                      )}
-                                    />
-                                  </div>
+                                  <FormField
+                                    control={form.control}
+                                    name="comment"
+                                    render={({ field }) => (
+                                      <FormItem>
+                                        <FormLabel className="dark:text-gray-300">
+                                          Your Opinion
+                                        </FormLabel>
+                                        <FormControl>
+                                          <Textarea
+                                            className="dark:text-gray-300"
+                                            {...field}
+                                            value={field.value || ""}
+                                          />
+                                        </FormControl>
+                                        <FormMessage className="text-red-500" />
+                                      </FormItem>
+                                    )}
+                                  />
+
                                   <div className="mt-2">
-                                    <StarRating></StarRating>
+                                    <StarRating />
                                   </div>
-                                  <div>
-                                    <Button
-                                      onClick={() => setTutorId(tutor?._id)}
-                                      className="mt-2 cursor-pointer border-0 hover:border btn bg-gray-300 text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ..."
-                                      type="submit"
-                                    >
-                                      Submit
-                                    </Button>
-                                  </div>
+
+                                  <Button
+                                    type="submit"
+                                    onClick={() => setTutorId(tutor._id)}
+                                    className="mt-3 w-full py-1 text-sm bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white"
+                                  >
+                                    Submit
+                                  </Button>
                                 </form>
                               </Form>
 
-                              <div className="max-h-[52%] overflow-y-auto">
+                              {/* Display Reviews */}
+                              <div className="mt-4 space-y-4">
                                 {reviews
-                                  ?.filter(
-                                    (review: any) =>
-                                      review?.tutor?._id === tutor?._id
-                                  )
-                                  .map((review, index) => (
+                                  ?.filter((r) => r?.tutor?._id === tutor?._id)
+                                  .map((review, idx) => (
                                     <div
-                                      key={review._id}
-                                      className="flex gap-2 mb-5"
+                                      key={idx}
+                                      className="flex gap-3 items-start"
                                     >
-                                      {review?.student?.profileImage ? (
-                                        <Avatar>
-                                          <AvatarImage
-                                            src={review?.student?.profileImage}
-                                            alt="@shadcn"
-                                          />
-                                        </Avatar>
-                                      ) : (
-                                        <Avatar>
-                                          <AvatarImage
-                                            src="https://github.com/shadcn.png"
-                                            alt="@shadcn"
-                                          />
-                                        </Avatar>
-                                      )}
+                                      <Avatar>
+                                        <AvatarImage
+                                          src={
+                                            review?.student?.profileImage ||
+                                            "https://github.com/shadcn.png"
+                                          }
+                                          alt="User"
+                                        />
+                                      </Avatar>
                                       <div>
-                                        <div className="flex items-center gap-1">
-                                          <h2 className="text-lg">
-                                            {review?.student?.name}
-                                          </h2>
-                                          <p>
-                                            <ShowRating
-                                              RatingShow={review?.rating}
-                                            ></ShowRating>
-                                          </p>
+                                        <div className="flex items-center gap-1 font-semibold dark:text-gray-300">
+                                          {review?.student?.name}
+                                          <ShowRating
+                                            RatingShow={review?.rating}
+                                          />
                                         </div>
-                                        <p className="text-sm md:text-sm lg:text-lg">
+                                        <p className="text-sm text-gray-600 dark:text-gray-300">
                                           {review?.comment}
                                         </p>
                                       </div>
                                     </div>
                                   ))}
                               </div>
-
-                              <DialogFooter></DialogFooter>
                             </DialogContent>
                           </Dialog>
                         </div>
-                      )}
-                    </div>
+
+                        <ShowRating RatingShow={tutor?.ratings[0]} />
+                      </div>
+                    ) : (
+                      <div className="flex justify-between items-center dark:text-gray-300 text-sm">
+                        <span>Reviews ({tutor?.ratings?.length})</span>
+                        <ShowRating RatingShow={tutor?.ratings[0]} />
+                      </div>
+                    )}
+
+                    {/* Buttons */}
+                    {user?.role === "student" && (
+                      <div className="grid grid-cols-2 gap-2 mt-3">
+                        <Button
+                          onClick={() => handleRequest(tutor._id)}
+                          className="w-full py-1 text-sm bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white"
+                          disabled={
+                            acceptedTutors.includes(tutor._id) ||
+                            requestedTutors.includes(tutor._id)
+                          }
+                        >
+                          {acceptedTutors.includes(tutor._id)
+                            ? "Accepted"
+                            : requestedTutors.includes(tutor._id)
+                            ? "Requested"
+                            : "Add"}
+                        </Button>
+
+                        <Link href={`/booking/${tutor._id}`}>
+                          <Button className="w-full py-1 text-sm bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white">
+                            Book Now
+                          </Button>
+                        </Link>
+                      </div>
+                    )}
+
+                    {/* Comment Section */}
                   </div>
                 </div>
               ))

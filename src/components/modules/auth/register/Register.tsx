@@ -18,10 +18,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { registerStudent } from "@/services/authService";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+
 const RegisterForm = () => {
   const form = useForm({
     resolver: zodResolver(registrationSchema),
   });
+
   const {
     formState: { isSubmitting },
   } = form;
@@ -37,11 +39,9 @@ const RegisterForm = () => {
       email: data?.email,
       password: data?.password,
     };
-    console.log(userData);
 
     try {
       const res = await registerStudent(userData);
-      console.log(res);
       if (res?.success) {
         toast.success(res?.message);
         router.push("/login");
@@ -50,123 +50,128 @@ const RegisterForm = () => {
       console.log(error);
     }
   };
+
   return (
-    <div className=" border border-gray-300 w-full flex-grow  max-w-md p-5 rounded">
-      <div className="flex items-center justify-center space-x-2 pb-2">
-        <h1 className="font-semibold text-xl">Register</h1>
-        <p className="text-sm text-extralight text-gray-600">
-          {" "}
-          join us today and start your journey
-        </p>
-      </div>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Name</FormLabel>
-                <FormControl>
-                  <Input
-                    className="border border-gray-400 "
-                    {...field}
-                    value={field.value || ""}
-                  />
-                </FormControl>
-                <FormMessage className="text-red-500" />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="mt-2">Email</FormLabel>
-                <FormControl>
-                  <Input
-                    className="border border-gray-400 "
-                    {...field}
-                    value={field.value || ""}
-                  />
-                </FormControl>
+    <div className="min-h-screen flex items-center justify-center  p-4">
+      <div className="w-full max-w-md bg-white dark:bg-gray-900 text-gray-800 dark:text-white rounded-xl shadow-lg p-6">
+        <div className="text-center mb-4">
+          <h2 className="text-2xl font-bold">Create an Account</h2>
+          <p className="text-sm text-gray-600 dark:text-gray-300">
+            Join us today and start your journey
+          </p>
+        </div>
 
-                <FormMessage className="text-red-500" />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="mt-2">Password</FormLabel>
-                <FormControl>
-                  <Input
-                    className="border border-gray-400"
-                    type="password"
-                    {...field}
-                    value={field.value || ""}
-                  />
-                </FormControl>
-
-                <FormMessage className="text-red-500" />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="confirmPassword"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="mt-2">Confirm Password</FormLabel>
-                <FormControl>
-                  <Input
-                    className="border border-gray-400"
-                    type="password"
-                    {...field}
-                    value={field.value || ""}
-                  />
-                </FormControl>
-
-                {confirmPassword && password !== confirmPassword ? (
-                  <FormMessage className="text-red-500">
-                    Password dose not match
-                  </FormMessage>
-                ) : (
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      className="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700"
+                      placeholder="Enter your full name"
+                      value={field.value || ""}
+                    />
+                  </FormControl>
                   <FormMessage className="text-red-500" />
-                )}
-              </FormItem>
-            )}
-          />
+                </FormItem>
+              )}
+            />
 
-          <div className="w-full flex flex-grow flex-col space-y-1 mt-2">
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      className="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700"
+                      placeholder="Enter your email"
+                      value={field.value || ""}
+                    />
+                  </FormControl>
+                  <FormMessage className="text-red-500" />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Password</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="password"
+                      {...field}
+                      className="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700"
+                      placeholder="Create a password"
+                      value={field.value || ""}
+                    />
+                  </FormControl>
+                  <FormMessage className="text-red-500" />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="confirmPassword"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Confirm Password</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="password"
+                      {...field}
+                      className="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700"
+                      placeholder="Confirm your password"
+                      value={field.value || ""}
+                    />
+                  </FormControl>
+                  {confirmPassword && password !== confirmPassword ? (
+                    <FormMessage className="text-red-500">
+                      Password does not match
+                    </FormMessage>
+                  ) : (
+                    <FormMessage className="text-red-500" />
+                  )}
+                </FormItem>
+              )}
+            />
+
             <Button
-              disabled={!!confirmPassword && password !== confirmPassword}
-              className="roudend-full cursor-pointer border-0 bg-gray-300 text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ..."
               type="submit"
+              disabled={!!confirmPassword && password !== confirmPassword}
+              className="w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white font-semibold py-2 rounded hover:opacity-90 transition"
             >
               {isSubmitting ? "Registering..." : "Register"}
             </Button>
-            <p className="text-sm text-extralight text-gray-600">
-              {" "}
-              All ready have an account?{" "}
-              <Link className="text-cyan-500" href="/login">
+
+            <div className="text-sm text-center mt-3 text-gray-600 dark:text-gray-400">
+              Already have an account?{" "}
+              <Link href="/login" className="text-cyan-400 hover:underline">
                 Login
               </Link>
-            </p>
-            <p className="text-sm text-extralight text-gray-600">
-              {" "}
-              As a Tutor{" "}
-              <Link className="text-cyan-500" href="/register/tutor">
-                Registration
+              <br />
+              Want to be a tutor?{" "}
+              <Link
+                href="/register/tutor"
+                className="text-cyan-400 hover:underline"
+              >
+                Register as Tutor
               </Link>
-            </p>
-          </div>
-        </form>
-      </Form>
+            </div>
+          </form>
+        </Form>
+      </div>
     </div>
   );
 };

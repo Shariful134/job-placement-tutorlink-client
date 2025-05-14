@@ -1,11 +1,10 @@
 "use client";
+
 import { useUser } from "@/context/UserContext";
 import { getAllUsers } from "@/services/User";
 import { useEffect, useState } from "react";
-
 import { ITutor } from "../home/page";
 import { NMTable } from "@/components/ui/core/NMTable";
-
 import { ColumnDef } from "@tanstack/react-table";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { TBooking } from "@/types/bookings";
@@ -14,22 +13,24 @@ import {
   cancelBooking,
   getAllBookings,
 } from "@/services/request";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { SkeletonLoading } from "@/components/ui/shared/SkeletonLoading";
 
 const BookingRequest = () => {
-  const { user, setIsLoading } = useUser();
-  const [bookings, setBookings] = useState<TBooking[] | []>([]);
-  const [users, setUsers] = useState<ITutor[] | []>([]);
+  const { user, setIsLoading, isLoading } = useUser();
+  const [bookings, setBookings] = useState<TBooking[]>([]);
+  const [users, setUsers] = useState<ITutor[]>([]);
 
   const handleBookingRequest = async (id: string) => {
     await acceptBooking(id);
-    const databooking = await getAllBookings();
-    setBookings(databooking?.data);
+    const updated = await getAllBookings();
+    setBookings(updated?.data || []);
   };
 
-  //handle Booking cancel
   const handleBookingCancel = async (id: string) => {
     await cancelBooking(id);
-    setBookings((prev) => prev?.filter((booking) => booking?._id !== id));
+    setBookings((prev) => prev.filter((booking) => booking?._id !== id));
   };
 
   useEffect(() => {
@@ -41,114 +42,112 @@ const BookingRequest = () => {
           getAllBookings(),
         ]);
 
-        setUsers(usersData?.data);
-        setBookings(bookingsData?.data);
+        setUsers(usersData?.data || []);
+        setBookings(bookingsData?.data || []);
         setIsLoading(false);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
     fetchData();
   }, []);
 
-  const currentTutor = users?.find((item) => item.email === user?.userEmail);
-
-  const BookingTutor = bookings?.filter(
+  const currentTutor = users.find((item) => item.email === user?.userEmail);
+  const BookingTutor = bookings.filter(
     (item) => item?.tutor?._id === currentTutor?._id
   );
 
-  console.log(BookingTutor);
   const columns: ColumnDef<any>[] = [
     {
       accessorKey: "student",
-      header: () => <div className="text-right w-8">Name</div>,
-      cell: ({ row }) => {
-        return (
-          <div className="flex items-center space-x-3">
-            <Avatar>
-              <AvatarImage
-                src={row.original.student.profileImage}
-                alt={row.original.student.name}
-              />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-            <div className="text-right font-medium w-8">
-              {row.original.student.name}
-            </div>
-          </div>
-        );
-      },
+      header: "Student",
+      cell: ({ row }) => (
+        <div className="flex items-center space-x-3">
+          <Avatar>
+            <AvatarImage
+              src={row.original.student.profileImage}
+              alt={row.original.student.name}
+            />
+            <AvatarFallback>
+              {row.original.student.name?.[0] ?? "S"}
+            </AvatarFallback>
+          </Avatar>
+          <span>{row.original.student.name}</span>
+        </div>
+      ),
     },
     {
-      accessorKey: "tutor",
-      header: () => <div className="text-right w-8">Subjects</div>,
-      cell: ({ row }) => {
-        const subjects = row.original.tutor?.subjects;
-
-        return (
-          <div className="flex items-center space-x-3">
-            <div className="text-right font-medium w-8">
-              {subjects?.join(", ")}
-            </div>
-          </div>
-        );
-      },
+      accessorKey: "subjects",
+      header: "Subjects",
+      cell: ({ row }) => <div>{row.original.tutor?.subjects?.join(", ")}</div>,
     },
     {
       accessorKey: "bookingRequest",
-      header: () => <div className="text-start w-8 ">Request Status</div>,
-      cell: ({ row }) => {
-        return (
-          <div className="flex items-center  space-x-3">
-            {row.original.bookingRequest ? (
-              <p className="btn text-green-500 bg-green-300/25 font-normal px-2 py-1 h-6 border-0 rounded">
-                Accepted
-              </p>
-            ) : (
-              <p className="text-green-500 bg-green-300/25 px-2  rounded">
-                Requested
-              </p>
-            )}
-          </div>
-        );
-      },
+      header: "Status",
+      cell: ({ row }) => (
+        <span
+          className={`px-2 py-1 rounded text-sm font-medium ${
+            row.original.bookingRequest
+              ? "bg-green-100 text-green-700 dark:bg-green-800/30 dark:text-green-300"
+              : "bg-yellow-100 text-yellow-700 dark:bg-yellow-800/30 dark:text-yellow-300"
+          }`}
+        >
+          {row.original.bookingRequest ? "Accepted" : "Requested"}
+        </span>
+      ),
     },
     {
-      accessorKey: "Action",
-      header: () => <div className="text-">Action</div>,
-      cell: ({ row }) => {
-        return (
-          <div className="flex items-center space-x-2">
-            {!row.original.bookingRequest && (
-              <button
-                onClick={() => handleBookingRequest(row?.original?._id)}
-                className="btn text-green-500 bg-green-300/25 font-normal px-2 py-1 h-6 border-0 rounded"
-              >
-                Accepted
-              </button>
-            )}
-
-            <button
-              onClick={() => handleBookingCancel(row?.original?._id)}
-              className="btn text-green-500 bg-green-300/25 font-normal px-2 py-1 h-6 border-0 rounded"
+      accessorKey: "action",
+      header: "Action",
+      cell: ({ row }) => (
+        <div className="flex space-x-2">
+          {!row.original.bookingRequest && (
+            <Button
+              onClick={() => handleBookingRequest(row.original._id)}
+              variant="outline"
+              className="border-green-600 text-green-600 hover:bg-green-50 dark:hover:bg-green-900"
             >
-              Cancel
-            </button>
-          </div>
-        );
-      },
+              Accept
+            </Button>
+          )}
+          <Button
+            onClick={() => handleBookingCancel(row.original._id)}
+            variant="destructive"
+            className="text-black dark:text-white dark:border-green-600 dark:bg-red-500/25  bg-red-600/75 hover:bg-red-600 cursor-pointer"
+          >
+            Cancel
+          </Button>
+        </div>
+      ),
     },
   ];
 
-  return (
-    <div>
-      Request for Bookings
-      <div>
-        <div className="pt-5">
-          <NMTable columns={columns} data={BookingTutor || []}></NMTable>
-        </div>
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <SkeletonLoading />
       </div>
-    </div>
+    );
+  }
+  return (
+    <Card className="w-full shadow-lg dark:bg-gray-900 dark:text-white">
+      <CardHeader>
+        <CardTitle className="text-xl font-bold text-center">
+          Booking Requests
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        {BookingTutor.length > 0 ? (
+          <div className="pt-5">
+            <NMTable columns={columns} data={BookingTutor} />
+          </div>
+        ) : (
+          <p className="text-center text-muted-foreground dark:text-gray-400">
+            No booking requests found.
+          </p>
+        )}
+      </CardContent>
+    </Card>
   );
 };
 

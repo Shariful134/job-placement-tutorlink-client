@@ -1,3 +1,4 @@
+
 import CategoryTutor from "@/components/modules/tutor/CategoryTutor";
 
 const CategoryPage = async ({

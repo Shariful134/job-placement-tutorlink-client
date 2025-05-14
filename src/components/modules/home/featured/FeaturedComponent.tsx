@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import secure from "../../../../app/assest/images/img1.jpeg";
 import help from "../../../../app/assest/images/img2.jpeg";
@@ -16,8 +17,10 @@ export default function FeatureSection() {
           alt="secure"
           className="mx-auto h-12 mb-3"
         />
-        <h3 className="font-semibold text-lg">100% SECURE PAYMENTS</h3>
-        <p className="text-sm md:text-sm lg:text-lg text-gray-700 mt-4">
+        <h3 className="font-semibold text-lg dark:text-gray-300">
+          100% SECURE PAYMENTS
+        </h3>
+        <p className="text-sm md:text-sm lg:text-lg text-gray-700 mt-4 dark:text-gray-300">
           All major credit & debit cards accepted
         </p>
       </div>
@@ -30,8 +33,10 @@ export default function FeatureSection() {
           alt="help center"
           className="mx-auto h-12 mb-3 "
         />
-        <h3 className="font-semibold text-lg">HELP CENTER</h3>
-        <p className="text-sm md:text-sm lg:text-lg text-gray-700 mt-4">
+        <h3 className="font-semibold text-lg dark:text-gray-300">
+          HELP CENTER
+        </h3>
+        <p className="text-sm md:text-sm dark:text-gray-300 lg:text-lg text-gray-700 mt-4">
           Got a question? Look no further. Browse our FAQs or submit your here.
         </p>
       </div>
@@ -44,8 +49,8 @@ export default function FeatureSection() {
           alt="trustpay"
           className="mx-auto h-12 mb-3"
         />
-        <h3 className="font-semibold text-lg">TRUSTPAY</h3>
-        <p className="text-sm md:text-sm lg:text-lg text-gray-700 mt-4">
+        <h3 className="font-semibold  dark:text-gray-300 text-lg">TRUSTPAY</h3>
+        <p className="text-sm md:text-sm dark:text-gray-300 lg:text-lg text-gray-700 mt-4">
           100% Payment Protection. Easy Return Policy
         </p>
       </div>
@@ -58,8 +63,10 @@ export default function FeatureSection() {
           alt="worldwide delivery"
           className="mx-auto h-12 mb-3"
         />
-        <h3 className="font-semibold text-lg">WORLDWIDE TEACHING</h3>
-        <p className="text-sm md:text-sm lg:text-lg text-gray-700 mt-4">
+        <h3 className="font-semibold dark:text-gray-300 text-lg">
+          WORLDWIDE TEACHING
+        </h3>
+        <p className="text-sm md:text-sm dark:text-gray-300 lg:text-lg text-gray-700 mt-4">
           With sites in 5 languages, we ship to over 200 countries & regions.
         </p>
       </div>
@@ -72,8 +79,10 @@ export default function FeatureSection() {
           alt="great value"
           className="mx-auto h-12 mb-3"
         />
-        <h3 className="font-semibold text-lg">GREAT VALUE</h3>
-        <p className="text-sm md:text-sm lg:text-lg text-gray-700 mt-4">
+        <h3 className="font-semibold text-lg dark:text-gray-300">
+          GREAT VALUE
+        </h3>
+        <p className="text-sm md:text-sm dark:text-gray-300 lg:text-lg text-gray-700 mt-4">
           We offer competitive prices on our 100 million plus product range.
         </p>
       </div>

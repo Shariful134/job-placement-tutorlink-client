@@ -139,9 +139,10 @@ const TutorDetailsComponent = ({ id }: { id: string }) => {
     }
   };
 
+  //handle loading
   if (loading) {
     return (
-      <div className="pt-20 flex justify-center">
+      <div className="min-h-screen flex justify-center items-center">
         <SkeletonLoading />
       </div>
     );
@@ -153,7 +154,7 @@ const TutorDetailsComponent = ({ id }: { id: string }) => {
           {tutorDetails?.map((tutorData: ITutor) => (
             <div
               key={tutorData?._id}
-              className=" p-5 card shadow-md xl:shadow-white bg-base-100 mx-auto min-w-[70%]  h-full flex flex-col md:flex-row justify-center items-center "
+              className=" p-5 card shadow xl:shadow-white bg-base-100 dark:bg-black mx-auto min-w-[70%]  h-full flex flex-col md:flex-row justify-center items-center "
             >
               <div className="flex flex-col justify-center items-center">
                 <Image
@@ -163,39 +164,45 @@ const TutorDetailsComponent = ({ id }: { id: string }) => {
                   alt={tutorData?.name ?? "Tutor"}
                   className="rounded-md"
                 ></Image>
-                <span className="text-sm">{tutorData?.email}</span>
+                <span className="text-sm dark:text-gray-300 ">
+                  {tutorData?.email}
+                </span>
                 <ShowRating RatingShow={tutorData?.ratings[0]}></ShowRating>
               </div>
               <div className="card-body ps-0 sm:ps-5 ">
                 <div className="flex justify-center items-center">
-                  <h2 className="card-title text-sm sm:text-xl ">
+                  <h2 className="dark:text-gray-300 card-title text-sm sm:text-xl ">
                     {tutorData?.name}{" "}
                   </h2>
-                  <p className=" text-sm md:text-sm  text-gray-700 ">
+                  <p className="dark:text-gray-400  text-sm md:text-sm  text-gray-700 ">
                     ( {tutorData?.gradeLevel})
                   </p>
                 </div>
-                <p className="  text-gray-700 ">
+                <p className="dark:text-gray-300   text-gray-700 ">
                   <span className="font-semibold text-sm md:text-smlg:text-lg">
                     {tutorData?.category}
                   </span>
                   (category)
                 </p>
-                <p className=" text-sm md:text-sm lg:text-lg text-gray-700 ">
-                  <span className="text-gray-900">Subject: </span>{" "}
+                <p className="dark:text-gray-300  text-sm md:text-sm lg:text-lg text-gray-700 ">
+                  <span className="text-gray-900 dark:text-gray-300 ">
+                    Subject:{" "}
+                  </span>{" "}
                   {tutorData?.subjects?.join(", ")}
                 </p>
-                <p className=" text-sm md:text-sm lg:text-lg text-gray-700 ">
-                  <span className="text-gray-900">HourlyRatelity:</span>{" "}
+                <p className="dark:text-gray-300  text-sm md:text-sm lg:text-lg text-gray-700 ">
+                  <span className="text-gray-900 dark:text-gray-300 ">
+                    HourlyRatelity:
+                  </span>{" "}
                   {tutorData?.hourlyRate} $
                 </p>
 
-                <p className=" text-sm md:text-sm lg:text-lg text-gray-700 ">
+                <p className="dark:text-gray-300  text-sm md:text-sm lg:text-lg text-gray-700 ">
                   Phone: {tutorData?.phoneNumber}
                 </p>
 
-                <p className=" text-sm md:text-sm lg:text-lg text-gray-700 ">
-                  <span className="text-gray-900"> </span>{" "}
+                <p className="dark:text-gray-300  text-sm md:text-sm lg:text-lg text-gray-700 ">
+                  <span className="text-gray-900 dark:text-gray-300 "> </span>{" "}
                   {tutorData?.availability
                     ?.map(
                       (avail: { day: string; time: string }) =>
@@ -203,8 +210,8 @@ const TutorDetailsComponent = ({ id }: { id: string }) => {
                     )
                     .join(", ")}
                 </p>
-                <p className=" text-sm md:text-sm lg:text-lg text-gray-700 ">
-                  <span className="text-gray-900">
+                <p className="dark:text-gray-300  text-sm md:text-sm lg:text-lg text-gray-700 ">
+                  <span className="text-gray-900 dark:text-gray-300 ">
                     Details: {tutorData?.bio}
                   </span>{" "}
                 </p>
@@ -243,7 +250,7 @@ const TutorDetailsComponent = ({ id }: { id: string }) => {
 
         {/* =============================Releted Tutor================================ */}
         <div className="container mx-auto shadow-sm p-5 flex flex-wrap justify-start mt-5  gap-3 ">
-          {reletedTutors?.map((tutor) => (
+          {/* {reletedTutors?.map((tutor) => (
             <div
               key={tutor._id}
               className="card bg-base-100 w-[95%] group min-w-[100px] max-w-[120px]  border border-gray-200 hover:shadow-sm"
@@ -277,7 +284,46 @@ const TutorDetailsComponent = ({ id }: { id: string }) => {
                 </div>
               </div>
             </div>
-          ))}
+          ))} */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            {reletedTutors?.map((tutor) => (
+              <div
+                key={tutor._id}
+                className="group bg-white dark:bg-black border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden"
+              >
+                <div className="relative w-full ">
+                  <Image
+                    className="object-cover w-full h-full"
+                    src={tutor.profileImage}
+                    width={400}
+                    height={270}
+                    alt="profileImage"
+                  />
+
+                  {/* View Profile button */}
+                  <Link
+                    href={`/tutors/${tutor._id}`}
+                    className="absolute inset-x-0 bottom-0 text-center py-2 text-white dark:text-gray-300 text-xs font-semibold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 
+            sm:opacity-0 sm:group-hover:opacity-100 opacity-100 transition-opacity duration-300"
+                  >
+                    View Profile
+                  </Link>
+                </div>
+
+                <div className="p-3 flex flex-col items-center justify-center">
+                  <h2 className="text-sm dark:text-gray-300 font-semibold text-gray-800">
+                    {tutor.name}
+                  </h2>
+                  <p className="text-xs dark:text-gray-300 text-gray-600  mt-1">
+                    ${tutor.hourlyRate}/hr
+                  </p>
+                  <div className="mt-2 ">
+                    <ShowRating RatingShow={tutor?.ratings[0]} />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </>

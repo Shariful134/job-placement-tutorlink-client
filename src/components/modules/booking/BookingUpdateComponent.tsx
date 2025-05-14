@@ -18,6 +18,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { SkeletonLoading } from "@/components/ui/shared/SkeletonLoading";
 import { getSingleBooking, updateBooking } from "@/services/request";
 import { TBooking } from "@/types/bookings";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
@@ -34,6 +35,7 @@ export function BookingUpdateComponent({
   const [bookingData, setBookingData] = useState<TBooking | undefined>(
     undefined
   );
+  const [loading, setLoading] = useState<boolean>(false);
 
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [time, setTime] = useState(0);
@@ -46,12 +48,15 @@ export function BookingUpdateComponent({
     },
   });
   useEffect(() => {
+    setLoading(true);
     const fetchData = async () => {
       try {
         const res = await getSingleBooking(id);
         setBookingData(res?.data);
+        setLoading(false);
       } catch (error) {
         console.log(error);
+        setLoading(false);
       }
     };
     fetchData();
@@ -92,6 +97,13 @@ export function BookingUpdateComponent({
     console.log(data);
   };
 
+  if (loading) {
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <SkeletonLoading />
+      </div>
+    );
+  }
   return (
     <Dialog open={openModal} onOpenChange={setOpenModal}>
       <DialogTrigger asChild>

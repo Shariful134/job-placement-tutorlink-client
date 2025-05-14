@@ -241,14 +241,6 @@ const HomeComponent = () => {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="pt-20 flex justify-center">
-        <SkeletonLoading />
-      </div>
-    );
-  }
-
   const handleCategoryChange = (value: string) => {
     setSelectedCategory(value);
 
@@ -304,19 +296,28 @@ const HomeComponent = () => {
   const allSubjects = tutors?.map((tutor) => tutor.subjects);
   const uniqueSubjects = [...new Set(allSubjects?.flat())];
 
-  console.log(uniqueSubjects);
   const allCategories = tutors?.map((tutor) => tutor.category);
   const categories = [...new Set(allCategories)];
 
+  //handle loading
+  if (loading) {
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <SkeletonLoading />
+      </div>
+    );
+  }
+
+  console.log("user:", user);
   return (
     <div>
       {/* =============================Banner section=========================== */}
-      <div className="container mx-auto px-2 flex flex-col md:flex-row items-center pt-15 md:pt-20">
+      <div className=" container mx-auto px-2 flex flex-col md:flex-row items-center pt-15 md:pt-20">
         <div className="pt-5 text-center md:text-start">
-          <h2 className="text-2xl md:text-3xl lg:text-5xl  ">
+          <h2 className="text-2xl md:text-3xl lg:text-5xl dark:text-gray-300 ">
             Learn Better, <span className="text-pink-500">AcademyNest !</span>
           </h2>
-          <p className="text-sm md:text-sm lg:text-lg text-gray-700 mt-4">
+          <p className="dark:text-gray-300 text-sm md:text-sm lg:text-lg text-gray-700  mt-4">
             Looking for the best tutors? TutorLink 🎓 connects students with
             expert tutors for personalized learning. Find tutors by subject,
             grade, or expertise and book sessions effortlessly. Learn smarter,
@@ -327,7 +328,7 @@ const HomeComponent = () => {
             <input
               type="text"
               placeholder="Search for tutors"
-              className=" w-full min-h-[37px] max-w-6xl rounded-md border border-gray-400 px-5  text-sm md:text-sm lg:text-lg text-gray-700"
+              className="dark:text-gray-300 w-full min-h-[37px] max-w-6xl rounded-md border border-gray-400 px-5  text-sm md:text-sm lg:text-lg text-gray-700"
             />
           </div>
           <Button
@@ -348,7 +349,7 @@ const HomeComponent = () => {
         </div>
       </div>
       <div className="container mx-auto px-2 overflow-x-hidden">
-        <div className="flex justify-center items-center bg-gray-200 ">
+        <div className="flex justify-center items-center bg-gray-200 dark:bg-gray-400 ">
           <Image
             src={bkash}
             priority={true}
@@ -375,8 +376,8 @@ const HomeComponent = () => {
 
       {/* =========================category section ========================= */}
       <div>
-        <div className="container mx-auto mt-5 px-2 overflow-x-hidden">
-          <h2 className="text-xl md:text-2xl lg:text-4xl text-center md:text-start  mb-5 ">
+        <div className="container mx-auto mt-5 px-2 overflow-x-hidden ">
+          <h2 className="dark:text-gray-300 text-xl md:text-2xl lg:text-4xl text-center md:text-start  mb-5 ">
             Course <span className="text-pink-500">Categories ____</span>
           </h2>
           <div>
@@ -384,7 +385,7 @@ const HomeComponent = () => {
               {categories?.map((category: string, index: number) => (
                 <Card
                   key={index}
-                  className="w-[95%] border border-gray-200 hover:shadow-lg"
+                  className="dark:text-gray-300 w-[95%] border border-gray-200 hover:shadow-lg"
                 >
                   <Link href={`/category/${category}`}>
                     <CardContent className="flex flex-col items-center">
@@ -419,16 +420,16 @@ const HomeComponent = () => {
           ></Image>
         </div>
         <div className="pt-5 text-start">
-          <h2 className="text-xl md:text-2xl lg:text-4xl  ">
+          <h2 className="dark:text-gray-300 text-xl md:text-2xl lg:text-4xl  ">
             Benifits of <span className="text-pink-500">e_Learn Tutorlink</span>
           </h2>
-          <p className="text-sm md:text-sm lg:text-lg text-gray-700 mt-4">
+          <p className="dark:text-gray-300 text-sm md:text-sm lg:text-lg text-gray-700 mt-4">
             Looking for the best tutors? TutorLink 🎓 connects students with
             expert tutors for personalized learning. Find tutors by subject,
             grade, or expertise and book sessions effortlessly. Learn smarter,
             achieve more!
           </p>
-          <ul className="list-disc pl-5 text-start text-sm md:text-sm lg:text-lg text-gray-700 mt-4">
+          <ul className="dark:text-gray-300 list-disc pl-5 text-start text-sm md:text-sm lg:text-lg text-gray-700 mt-4">
             <li>Find expert tutors by subject, grade, and expertise.</li>
             <li>Personalized learning experience tailored to your needs.</li>
             <li>Book sessions at your convenience.</li>
@@ -446,13 +447,13 @@ const HomeComponent = () => {
       </div>
 
       {/* ====================tutors section========================== */}
-      <div className="container px-2 mx-auto mt-5 md:mt-15">
+      <div className="container  px-2 mx-auto mt-5 md:mt-15 ">
         <div>
           {" "}
-          <h2 className="text-xl md:text-2xl lg:text-4xl  ">
+          <h2 className="dark:text-gray-300 text-xl md:text-2xl lg:text-4xl  ">
             Tutors of <span className="text-pink-500">e_Learn Tutorlink</span>
           </h2>
-          <p className="text-sm md:text-sm lg:text-lg text-gray-700 mt-4 max-w-3xl md:pb-5">
+          <p className="dark:text-gray-300 text-sm md:text-sm lg:text-lg text-gray-700 mt-4 max-w-3xl md:pb-5">
             Looking for the best tutors? TutorLink 🎓 connects students with
             expert tutors for personalized learning. Find tutors by subject,
             grade, or expertise and book sessions effortlessly. Learn smarter,
@@ -465,17 +466,19 @@ const HomeComponent = () => {
               <input
                 type="text"
                 onChange={(e) => setSearchValue(e.currentTarget.value)}
-                placeholder="Search for tutors"
-                className="w-full min-h-[37px] rounded-md border border-gray-400 px-5  text-sm md:text-sm lg:text-lg text-gray-700"
+                placeholder=" Search for tutors"
+                className="dark:text-gray-300 w-full min-h-[37px] rounded-md border border-gray-400 px-5  text-sm md:text-sm lg:text-lg text-gray-700"
               />
             </div>
             <div>
-              <h2 className="text-base lg:text-lg">Price Range</h2>
+              <h2 className="dark:text-gray-300 text-base lg:text-lg">
+                Price Range
+              </h2>
               <Select onValueChange={handlePriceChange}>
-                <SelectTrigger className="w-full rounded-md border border-gray-400 mb-4">
+                <SelectTrigger className="dark:text-gray-300 w-full rounded-md border border-gray-400 mb-4">
                   <SelectValue placeholder="Select Price" />
                 </SelectTrigger>
-                <SelectContent className="bg-white rounded-md border border-gray-400">
+                <SelectContent className="dark:bg-black dark:text-gray-300 bg-white rounded-md border border-gray-400">
                   <SelectGroup>
                     <SelectLabel className="w-full">HourlyRate</SelectLabel>
                     <SelectItem value="All">All</SelectItem>
@@ -491,18 +494,20 @@ const HomeComponent = () => {
               {/* =================================radio=============================== */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 ">
                 <div>
-                  <h2 className="text-base lg:text-lg text-white bg-purple-500 py-3 px-6 mb-5">
+                  <h2 className="dark:text-gray-300 text-base lg:text-lg text-white bg-purple-500 py-3 px-6 mb-5">
                     Category
                   </h2>
                   <RadioGroup
                     defaultValue="All"
                     value={selectedCategory}
                     onValueChange={(value) => setSelectedCategory(value)}
-                    className="space-y-2"
+                    className="dark:text-gray-300 space-y-2"
                   >
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="All" id="all" />
-                      <Label htmlFor="all">All Categories</Label>
+                      <Label className="dark:text-gray-300" htmlFor="all">
+                        All Categories
+                      </Label>
                     </div>
 
                     {categories.map((category, index) => (
@@ -514,14 +519,14 @@ const HomeComponent = () => {
                   </RadioGroup>
                 </div>
                 <div>
-                  <h2 className="text-lg text-white bg-purple-500 py-3 px-6 mb-5">
+                  <h2 className="dark:text-gray-300 text-lg text-white bg-purple-500 py-3 px-6 mb-5">
                     Subjects
                   </h2>
                   <RadioGroup
                     defaultValue="All"
                     value={selectedSubject}
                     onValueChange={handleSubjectChange}
-                    className="space-y-2 mt-4"
+                    className="dark:text-gray-300 space-y-2 mt-4"
                   >
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="All" id="all-subjects" />
@@ -546,224 +551,209 @@ const HomeComponent = () => {
                 </div>
               </div>
 
-              {/* =================================radio=============================== */}
+              {/* =================================card tutor=============================== */}
             </div>
           </div>
-
-          <div className="col-span-9 w-full">
-            <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-3">
+          <div className="col-span-9 w-full overflow-x-hidden ">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pr-2 md:pr-0 overflow-x-hidden justify-items-center md:justify-items-stretch">
               {!Array.isArray(updatedTutors) || updatedTutors?.length === 0 ? (
-                <div className="h-[300px] text-black text-xl md:text-3xl">
+                <div className="h-[300px] text-black text-xl md:text-3xl dark:text-gray-300">
                   Not Found Tutor Data
                 </div>
               ) : (
                 updatedTutors?.map((tutor, index) => (
                   <div
                     key={tutor._id || index}
-                    className="card bg-base-100 w-[95%] group border border-gray-200 hover:shadow-lg"
+                    className="relative w-full group bg-base-100 dark:bg-black border border-gray-300 dark:border-gray-700 rounded-md overflow-x-hidden hover:shadow-sm transition duration-300"
                   >
-                    <figure className="relative h-[100%]">
+                    {/* Image & Hover Button */}
+                    <figure className="relative w-full h-48 overflow-hidden">
                       <Image
-                        className="h-[100%]"
+                        className="w-full h-full object-cover"
                         src={tutor?.profileImage}
-                        priority={true}
                         width={1100}
                         height={650}
-                        alt="BannerImg"
-                      ></Image>
+                        alt="Tutor Image"
+                        priority
+                      />
                       <Link
-                        className="roudend-ful w-full absolute text-center py-1 lg:py-2 bottom-0 lg:bottom-1/2 left-0 lg:translate-y-1/2 opacity-100 lg:opacity-0 group-hover:opacity-100 cursor-pointer hover:text-gray-900 border-0 bg-gray-300 text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
                         href={`/tutors/${tutor._id}`}
+                        className="absolute bottom-0 left-0 w-full py-2 text-center text-white text-sm md:text-base font-medium bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition duration-300"
                       >
-                        Details
+                        View Profile
                       </Link>
                     </figure>
-                    <div className="card-body">
-                      <h2 className="card-title text-sm md:text-lg xl:text-xl">
+
+                    {/* Content */}
+                    <div className="p-3 space-y-1">
+                      <h2 className="font-semibold text-base md:text-lg dark:text-gray-300">
                         {tutor.name}
                       </h2>
-                      <p className=" text-sm md:text-sm lg:text-lg text-gray-700 ">
+                      <p className="text-sm text-gray-600 dark:text-gray-300">
                         {tutor.category}
                       </p>
+                      <p className="text-sm text-gray-700 dark:text-gray-300">
+                        ${tutor.hourlyRate} / hr
+                      </p>
 
-                      <div>
-                        <p>
-                          <span className="text-sm md:text-sm lg:text-lg text-gray-700">
-                            ${tutor.hourlyRate}
-                          </span>{" "}
-                          hr
-                        </p>
-                      </div>
-                      <div className="flex items-center">
-                        <p className="max-w-[80px] ">
-                          Review ( {tutor?.ratings?.length} )
-                        </p>
-                        <ShowRating RatingShow={tutor?.ratings[0]}></ShowRating>
-                      </div>
+                      {user?.role === "student" ? (
+                        <div className="flex justify-between items-center text-sm">
+                          <div>
+                            <Dialog>
+                              <DialogTrigger asChild>
+                                {/* <Button className="w-full py-1 text-sm bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white flex items-center justify-center gap-1">
+                                  <MessageSquareMore className="w-4 h-4" />{" "}
+                                  Comment
+                                </Button> */}
+                                <span className="underline cursor-pointer dark:text-gray-300">
+                                  Write Review{" "}
+                                  <span className="no-underline">
+                                    {" "}
+                                    ({tutor?.ratings?.length})
+                                  </span>
+                                </span>
+                              </DialogTrigger>
+                              <DialogContent className="bg-white dark:bg-black max-h-[90vh] overflow-y-auto">
+                                <DialogHeader>
+                                  <DialogTitle className="text-xl dark:text-gray-300">
+                                    Write a Review
+                                  </DialogTitle>
+                                </DialogHeader>
 
-                      <div className=" grid gap-3 grid-cols-12">
-                        <div className="col-span-6 xl:col-span-4">
-                          {user?.role === "student" && (
-                            <div className="flex flex-col lg-flex-row justify-between items-center gap-8">
-                              <div className="w-full">
-                                {acceptedTutors?.includes(tutor?._id) ? (
-                                  <Button className="roudend-ful w-full cursor-pointer hover:text-gray-900 border-0 bg-gray-300 text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
-                                    Accpted
-                                  </Button>
-                                ) : requestedTutors?.includes(tutor?._id) ? (
-                                  <Button className="roudend-ful w-full cursor-pointer hover:text-gray-900 border-0 bg-gray-300 text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
-                                    Request
-                                  </Button>
-                                ) : (
-                                  <Button
-                                    onClick={() => handleRequest(tutor?._id)}
-                                    className="roudend-ful w-full cursor-pointer hover:text-gray-900 border-0 bg-gray-300 text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
-                                  >
-                                    Add
-                                  </Button>
-                                )}
-                              </div>
-                            </div>
-                          )}
+                                <Form {...form}>
+                                  <form onSubmit={form.handleSubmit(onSubmit)}>
+                                    <FormField
+                                      control={form.control}
+                                      name="comment"
+                                      render={({ field }) => (
+                                        <FormItem>
+                                          <FormLabel className="dark:text-gray-300">
+                                            Your Opinion
+                                          </FormLabel>
+                                          <FormControl>
+                                            <Textarea
+                                              className="dark:text-gray-300"
+                                              {...field}
+                                              value={field.value || ""}
+                                            />
+                                          </FormControl>
+                                          <FormMessage className="text-red-500 " />
+                                        </FormItem>
+                                      )}
+                                    />
+
+                                    <div className="mt-2">
+                                      <StarRating />
+                                    </div>
+
+                                    <Button
+                                      type="submit"
+                                      onClick={() => setTutorId(tutor._id)}
+                                      className="mt-3 w-full py-1 text-sm bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white"
+                                    >
+                                      Submit
+                                    </Button>
+                                  </form>
+                                </Form>
+
+                                {/* Display Reviews */}
+                                <div className="mt-4 space-y-4">
+                                  {reviews
+                                    ?.filter(
+                                      (r) => r?.tutor?._id === tutor?._id
+                                    )
+                                    .map((review, idx) => (
+                                      <div
+                                        key={idx}
+                                        className="flex gap-3 items-start"
+                                      >
+                                        <Avatar>
+                                          <AvatarImage
+                                            src={
+                                              review?.student?.profileImage ||
+                                              "https://github.com/shadcn.png"
+                                            }
+                                            alt="User"
+                                          />
+                                        </Avatar>
+                                        <div>
+                                          <div className="flex items-center gap-1 font-semibold dark:text-gray-300">
+                                            {review?.student?.name}
+                                            <ShowRating
+                                              RatingShow={review?.rating}
+                                            />
+                                          </div>
+                                          <p className="text-sm text-gray-600 dark:text-gray-300">
+                                            {review?.comment}
+                                          </p>
+                                        </div>
+                                      </div>
+                                    ))}
+                                </div>
+                              </DialogContent>
+                            </Dialog>
+                          </div>
+
+                          <ShowRating RatingShow={tutor?.ratings[0]} />
                         </div>
-                        <div className="col-span-6 xl:col-span-4">
+                      ) : (
+                        <div className="flex justify-between items-center dark:text-gray-300 text-sm">
+                          <span>Reviews ({tutor?.ratings?.length})</span>
+                          <ShowRating RatingShow={tutor?.ratings[0]} />
+                        </div>
+                      )}
+
+                      {/* Buttons */}
+                      {user?.role === "student" && (
+                        <div className="grid grid-cols-2 gap-2 mt-3">
+                          <Button
+                            onClick={() => handleRequest(tutor._id)}
+                            className="w-full py-1 text-sm bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white"
+                            disabled={
+                              acceptedTutors.includes(tutor._id) ||
+                              requestedTutors.includes(tutor._id)
+                            }
+                          >
+                            {acceptedTutors.includes(tutor._id)
+                              ? "Accepted"
+                              : requestedTutors.includes(tutor._id)
+                              ? "Requested"
+                              : "Add"}
+                          </Button>
+
                           <Link href={`/booking/${tutor._id}`}>
-                            <Button className="roudend-ful w-full cursor-pointer hover:text-gray-900 border-0 bg-gray-300 text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
-                              Booking
+                            <Button className="w-full py-1 text-sm bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white">
+                              Book Now
                             </Button>
                           </Link>
                         </div>
-                        <div className="col-span-12 text-center xl:col-span-4">
-                          {user?.role === "student" && (
-                            <div className=" hover:bg-gray-400/25 mx-auto ">
-                              <Dialog>
-                                <DialogTrigger asChild>
-                                  <Button className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white w-full">
-                                    <MessageSquareMore />
-                                  </Button>
-                                </DialogTrigger>
-                                <DialogContent className="sm:max-w-[425px] max-h-[500px] bg-white">
-                                  <DialogHeader>
-                                    <DialogTitle></DialogTitle>
-                                    <DialogDescription></DialogDescription>
-                                  </DialogHeader>
-                                  <Form {...form}>
-                                    <form
-                                      onSubmit={form.handleSubmit(onSubmit)}
-                                    >
-                                      <div className="grid grid-cols-1  gap-2">
-                                        <FormField
-                                          control={form.control}
-                                          name="comment"
-                                          render={({ field }) => (
-                                            <FormItem>
-                                              <FormLabel>
-                                                Your opinion
-                                              </FormLabel>
-                                              <FormControl>
-                                                <Textarea
-                                                  {...field}
-                                                  value={field.value || ""}
-                                                ></Textarea>
-                                              </FormControl>
-                                              <FormMessage className="text-red-500" />
-                                            </FormItem>
-                                          )}
-                                        />
-                                      </div>
-                                      <div className="mt-2">
-                                        <StarRating></StarRating>
-                                      </div>
-                                      <div>
-                                        <Button
-                                          onClick={() => setTutorId(tutor?._id)}
-                                          className="mt-2 cursor-pointer border-0 hover:border btn bg-gray-300 text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ..."
-                                          type="submit"
-                                        >
-                                          Submit
-                                        </Button>
-                                      </div>
-                                    </form>
-                                  </Form>
+                      )}
 
-                                  <div className="max-h-[52%] overflow-y-auto">
-                                    {reviews
-                                      ?.filter(
-                                        (review: any) =>
-                                          review?.tutor?._id === tutor?._id
-                                      )
-                                      .map((review, index) => (
-                                        <div
-                                          key={review._id}
-                                          className="flex gap-2 mb-5"
-                                        >
-                                          {review?.student?.profileImage ? (
-                                            <Avatar>
-                                              <AvatarImage
-                                                src={
-                                                  review?.student?.profileImage
-                                                }
-                                                alt="@shadcn"
-                                              />
-                                            </Avatar>
-                                          ) : (
-                                            <Avatar>
-                                              <AvatarImage
-                                                src="https://github.com/shadcn.png"
-                                                alt="@shadcn"
-                                              />
-                                            </Avatar>
-                                          )}
-                                          <div>
-                                            <div className="flex items-center gap-1">
-                                              <h2 className="text-lg">
-                                                {review?.student?.name}
-                                              </h2>
-                                              <p>
-                                                <ShowRating
-                                                  RatingShow={review?.rating}
-                                                ></ShowRating>
-                                              </p>
-                                            </div>
-                                            <p className="text-sm md:text-sm lg:text-lg">
-                                              {review?.comment}
-                                            </p>
-                                          </div>
-                                        </div>
-                                      ))}
-                                  </div>
-
-                                  <DialogFooter></DialogFooter>
-                                </DialogContent>
-                              </Dialog>
-                            </div>
-                          )}
-                        </div>
-                      </div>
+                      {/* Comment Section */}
                     </div>
                   </div>
                 ))
               )}
             </div>
+
+            {/* View All Button */}
+            {Array.isArray(updatedTutors) && updatedTutors.length > 0 && (
+              <div className="text-center mt-6">
+                <Link href="/tutors">
+                  <Button className="px-6 py-2 text-sm bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white">
+                    View All Tutors
+                  </Button>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
-
-        {!Array.isArray(updatedTutors) || updatedTutors?.length === 0 ? (
-          ""
-        ) : (
-          <div className="mx-auto text-center mt-2 md:mt-5">
-            <Link href={"/tutors"}>
-              <Button className="roudend-full cursor-pointer hover:text-gray-900 border-0 bg-gray-300 text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ...">
-                View All
-              </Button>
-            </Link>
-          </div>
-        )}
       </div>
+
       {/* =====================================student sayas section====================== */}
       <div className="container mx-auto px-2 mt-5 md:my-15">
         <div>
-          <h2 className="text-xl md:text-2xl lg:text-4xl text-center md:text-start mb-2 sm:mb-5">
+          <h2 className="text-xl md:text-2xl lg:text-4xl text-center md:text-start mb-2 sm:mb-5 dark:text-gray-300">
             Our Student <span className="text-pink-500">Says</span>
           </h2>
         </div>
@@ -785,10 +775,10 @@ const HomeComponent = () => {
                           height={200}
                           alt={`${review?.student?.name}'s profile`}
                         />
-                        <h3 className="text-lg font-semibold">
+                        <h3 className="text-lg font-semibold dark:text-gray-300">
                           {review?.student?.name}
                         </h3>
-                        <p className="text-sm text-gray-600 mt-2 line-clamp-2">
+                        <p className="text-sm text-gray-600 mt-2 dark:text-gray-300 line-clamp-2">
                           {review?.comment}
                         </p>
                       </CardContent>
@@ -797,8 +787,8 @@ const HomeComponent = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="ms-15" />
-            <CarouselNext className="me-15" />
+            <CarouselPrevious className="ms-15 dark:text-gray-300" />
+            <CarouselNext className="me-15 dark:text-gray-300" />
           </Carousel>
         </div>
       </div>
@@ -808,10 +798,10 @@ const HomeComponent = () => {
       <div className="container mx-auto px-2 mt-5 md:mt-15">
         <div className="flex justify-between flex-col md:flex-row">
           <div>
-            <h2 className="text-xl md:text-2xl lg:text-4xl  ">
+            <h2 className="text-xl md:text-2xl lg:text-4xl dark:text-gray-300 ">
               Frequently Asked <span className="text-pink-500">Questions</span>
             </h2>
-            <p className="text-sm md:text-sm lg:text-lg text-gray-700 mt-4 max-w-3xl pb-5">
+            <p className="dark:text-gray-300 text-sm md:text-sm lg:text-lg text-gray-700 mt-4 max-w-3xl pb-5">
               Here are some of the most common questions students and tutors ask
               about our platform. If you have more queries, feel free to contact
               us.
@@ -820,51 +810,51 @@ const HomeComponent = () => {
           <div>
             <Accordion type="single" collapsible className="w-full">
               <AccordionItem value="item-3">
-                <AccordionTrigger className="text-sm md:text-sm lg:text-lg text-gray-700 mt-4 max-w-3xl pb-5 ">
+                <AccordionTrigger className=" dark:text-gray-300 text-sm md:text-sm lg:text-lg text-gray-700 mt-4 max-w-3xl pb-5 ">
                   How do I find a tutor?
                 </AccordionTrigger>
-                <AccordionContent className="text-sm md:text-sm lg:text-lg text-gray-700 mt-4 max-w-3xl pb-5">
+                <AccordionContent className="dark:text-gray-300 text-sm md:text-sm lg:text-lg text-gray-700 mt-4 max-w-3xl pb-5">
                   To find a tutor, browse available profiles, filter by subject
                   or location, view ratings, and book a session directly through
                   our secure, easy-to-use platform.
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-1">
-                <AccordionTrigger className="text-sm md:text-sm lg:text-lg text-gray-700 mt-4 max-w-3xl pb-5">
+                <AccordionTrigger className="dark:text-gray-300 text-sm md:text-sm lg:text-lg text-gray-700 mt-4 max-w-3xl pb-5">
                   How are payments processed?
                 </AccordionTrigger>
-                <AccordionContent className="text-sm md:text-sm lg:text-lg text-gray-700 mt-4 max-w-3xl pb-5">
+                <AccordionContent className="dark:text-gray-300 text-sm md:text-sm lg:text-lg text-gray-700 mt-4 max-w-3xl pb-5">
                   Payments are securely processed through our platform using
                   SSLCommerz, Stripe, or PayPal. Choose your method, pay safely,
                   and get instant booking confirmation.
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-2">
-                <AccordionTrigger className="text-sm md:text-sm lg:text-lg text-gray-700 mt-4 max-w-3xl pb-5">
+                <AccordionTrigger className=" dark:text-gray-300 text-sm md:text-sm lg:text-lg text-gray-700 mt-4 max-w-3xl pb-5">
                   What if I’m not satisfied with my tutor?
                 </AccordionTrigger>
-                <AccordionContent className="text-sm md:text-sm lg:text-lg text-gray-700 mt-4 max-w-3xl pb-5">
+                <AccordionContent className="dark:text-gray-300 text-sm md:text-sm lg:text-lg text-gray-700 mt-4 max-w-3xl pb-5">
                   Yes, you can cancel a session from your dashboard. If you are
                   not satisfied with your tutor, contact support—we’ll help you
                   reschedule or find a better match.
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-3">
-                <AccordionTrigger className="text-sm md:text-sm lg:text-lg text-gray-700 mt-4 max-w-3xl pb-5">
+                <AccordionTrigger className="dark:text-gray-300 text-sm md:text-sm lg:text-lg text-gray-700 mt-4 max-w-3xl pb-5">
                   What if I’m not satisfied with my tutor?
                 </AccordionTrigger>
-                <AccordionContent className="text-sm md:text-sm lg:text-lg text-gray-700 mt-4 max-w-3xl pb-5">
+                <AccordionContent className="dark:text-gray-300 text-sm md:text-sm lg:text-lg text-gray-700 mt-4 max-w-3xl pb-5">
                   If you not satisfied with your tutor, you can request a new
                   match or contact support for a refund or alternative tutor
                   options. We are here to help!
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-3">
-                <AccordionTrigger className="text-sm md:text-sm lg:text-lg text-gray-700 mt-4 max-w-3xl pb-5">
+                <AccordionTrigger className="dark:text-gray-300 text-sm md:text-sm lg:text-lg text-gray-700 mt-4 max-w-3xl pb-5">
                   How can I find the right tutor for the right tutor find the
                   right tutor my needs?
                 </AccordionTrigger>
-                <AccordionContent className="text-sm md:text-sm lg:text-lg text-gray-700 mt-4 max-w-3xl pb-5">
+                <AccordionContent className="dark:text-gray-300 text-sm md:text-sm lg:text-lg text-gray-700 mt-4 max-w-3xl pb-5">
                   Once you find a tutor, you can check their availability and
                   book a session at a convenient time. Payment is processed
                   securely through our platform.

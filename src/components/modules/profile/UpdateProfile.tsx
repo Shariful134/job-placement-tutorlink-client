@@ -91,6 +91,7 @@ const UpdateProfile = () => {
       });
     }
   }, [tutor, form]);
+
   const {
     formState: { isSubmitting },
   } = form;
@@ -104,6 +105,7 @@ const UpdateProfile = () => {
   const addAvailavility = () => {
     appendAvailability({ day: "", time: "" });
   };
+
   const profileImage = imageUrl ? imageUrl : "";
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const availability = data?.availability?.map((item: availability) => ({
@@ -118,10 +120,9 @@ const UpdateProfile = () => {
       availability,
       profileImage,
     };
-    console.log("tutorData: ", tutorData);
+
     try {
       const res = await updateTutorData(tutorData, tutor?._id);
-      console.log("res: ", res);
       if (res.success) {
         toast.success(res?.message);
       } else {
@@ -133,19 +134,18 @@ const UpdateProfile = () => {
   };
 
   return (
-    <div className="w-full flex-grow  max-w-md p-5 rounded">
+    <div className="w-full flex-grow max-w-md p-5 rounded dark:bg-gray-800 dark:text-white">
       <div className="flex items-center justify-center space-x-2 pb-2">
-        <h1 className="font-semibold text-xl">Update Your Profie as Tutotr</h1>
+        <h1 className="font-semibold text-xl">Update Your Profile as Tutor</h1>
       </div>
-      <div className="flex flex-col items-center mb-5 ">
-        {" "}
+      <div className="flex flex-col items-center mb-5">
         <div className="flex items-center justify-center mt-5">
           <UploadWidget onImageUpload={handleImageUpload} />
         </div>
       </div>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="grid grid-cols1 md:grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             <FormField
               control={form.control}
               name="name"
@@ -155,12 +155,11 @@ const UpdateProfile = () => {
                   <FormControl>
                     <Input
                       type="text"
-                      className="border border-gray-400 "
+                      className="border border-gray-400 dark:bg-gray-700 dark:text-white"
                       {...field}
                       value={field.value || ""}
                     />
                   </FormControl>
-
                   <FormMessage className="text-red-500" />
                 </FormItem>
               )}
@@ -174,12 +173,11 @@ const UpdateProfile = () => {
                   <FormControl>
                     <Input
                       type="text"
-                      className="border border-gray-400 "
+                      className="border border-gray-400 dark:bg-gray-700 dark:text-white"
                       {...field}
                       value={field.value || ""}
                     />
                   </FormControl>
-
                   <FormMessage className="text-red-500" />
                 </FormItem>
               )}
@@ -193,12 +191,11 @@ const UpdateProfile = () => {
                   <FormControl>
                     <Input
                       type="text"
-                      className="border border-gray-400 "
+                      className="border border-gray-400 dark:bg-gray-700 dark:text-white"
                       {...field}
                       value={field.value || ""}
                     />
                   </FormControl>
-
                   <FormMessage className="text-red-500" />
                 </FormItem>
               )}
@@ -211,12 +208,11 @@ const UpdateProfile = () => {
                   <FormLabel>Bio</FormLabel>
                   <FormControl>
                     <Input
-                      className="border border-gray-400 "
+                      className="border border-gray-400 dark:bg-gray-700 dark:text-white"
                       {...field}
                       value={field.value || ""}
                     />
                   </FormControl>
-
                   <FormMessage className="text-red-500" />
                 </FormItem>
               )}
@@ -229,12 +225,11 @@ const UpdateProfile = () => {
                   <FormLabel>Subject Name</FormLabel>
                   <FormControl>
                     <Input
-                      className="border border-gray-400 "
+                      className="border border-gray-400 dark:bg-gray-700 dark:text-white"
                       {...field}
                       value={field.value || ""}
                     />
                   </FormControl>
-
                   <FormMessage className="text-red-500" />
                 </FormItem>
               )}
@@ -244,15 +239,14 @@ const UpdateProfile = () => {
               name="gradeLevel"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>GradLevel</FormLabel>
+                  <FormLabel>Grade Level</FormLabel>
                   <FormControl>
                     <Input
-                      className="border border-gray-400 "
+                      className="border border-gray-400 dark:bg-gray-700 dark:text-white"
                       {...field}
                       value={field.value || ""}
                     />
                   </FormControl>
-
                   <FormMessage className="text-red-500" />
                 </FormItem>
               )}
@@ -262,11 +256,11 @@ const UpdateProfile = () => {
               name="hourlyRate"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>HourlyRate</FormLabel>
+                  <FormLabel>Hourly Rate</FormLabel>
                   <FormControl>
                     <Input
                       type="number"
-                      className="border border-gray-400 "
+                      className="border border-gray-400 dark:bg-gray-700 dark:text-white"
                       {...field}
                       value={field.value || ""}
                     />
@@ -283,7 +277,7 @@ const UpdateProfile = () => {
                   <FormLabel>Category</FormLabel>
                   <FormControl>
                     <Input
-                      className="border border-gray-400 "
+                      className="border border-gray-400 dark:bg-gray-700 dark:text-white"
                       {...field}
                       value={field.value || ""}
                     />
@@ -293,16 +287,17 @@ const UpdateProfile = () => {
               )}
             />
           </div>
+
           <div>
             <div className="flex justify-between items-center border-gray-300 border-t border-b py-3 my-5">
               <p className="text-primary font-bold text-xl">Days</p>
               <Button
                 onClick={addAvailavility}
                 variant="outline"
-                className="size-10 cursor-pointer hover:bg-gray-300 border-gray-300  "
+                className="size-10 cursor-pointer hover:bg-gray-300 border-gray-300 dark:hover:bg-gray-600"
                 type="button"
               >
-                <Plus className="text-primary border-gray-300 " />
+                <Plus className="text-primary border-gray-300 dark:text-white" />
               </Button>
             </div>
 
@@ -316,9 +311,13 @@ const UpdateProfile = () => {
                   name={`availability.${index}.day`}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Day {index + 1} </FormLabel>
+                      <FormLabel>Day {index + 1}</FormLabel>
                       <FormControl>
-                        <Input {...field} value={field.value || ""} />
+                        <Input
+                          className="dark:bg-gray-700 dark:text-white"
+                          {...field}
+                          value={field.value || ""}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -331,7 +330,11 @@ const UpdateProfile = () => {
                     <FormItem>
                       <FormLabel>Time {index + 1}</FormLabel>
                       <FormControl>
-                        <Input {...field} value={field.value || ""} />
+                        <Input
+                          className="dark:bg-gray-700 dark:text-white"
+                          {...field}
+                          value={field.value || ""}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -341,9 +344,9 @@ const UpdateProfile = () => {
             ))}
           </div>
 
-          <div className="w-full flex flex-grow flex-col space-y-1  mt-2">
+          <div className="w-full flex flex-grow flex-col space-y-1 mt-2">
             <Button
-              className=" cursor-pointer border-0 hover:border btn bg-gray-300 text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ..."
+              className="cursor-pointer border-0 hover:border btn bg-gray-300 text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 dark:bg-gray-600 dark:text-white"
               type="submit"
             >
               {isSubmitting ? "Updating..." : "Update"}

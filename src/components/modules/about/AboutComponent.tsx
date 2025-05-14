@@ -14,10 +14,10 @@ const AboutComponent = () => {
     <div className="container mx-auto px-2">
       <div className=" flex flex-col md:flex-row mt-0 sm:mt-5 lg:mt-5 gap-5 items-center justify-center">
         <div className="max-w-[1000px] text-center sm:text-start">
-          <h2 className="text-2xl md:text-3xl lg:text-5xl mt-0 sm:mt-5 ">
+          <h2 className="text-2xl dark:text-gray-300 md:text-3xl lg:text-5xl mt-0 sm:mt-5 ">
             About Our TutorLink
           </h2>
-          <p className="text-sm md:text-sm lg:text-lg text-gray-700 mt-4 ">
+          <p className="text-sm dark:text-gray-300 md:text-sm lg:text-lg text-gray-700 mt-4 ">
             TutorLink is your trusted learning companion — a user-friendly
             platform that connects students with verified tutors across a wide
             range of subjects. Whether you are aiming to ace your exams,
@@ -49,10 +49,10 @@ const AboutComponent = () => {
           ></Image>
         </div>
         <div>
-          <h2 className="text-2xl md:text-3xl lg:text-5xl order-2 md:order-1 text-center md:text-start">
+          <h2 className="text-2xl dark:text-gray-300 md:text-3xl lg:text-5xl order-2 md:order-1 text-center md:text-start">
             Mission StateMent
           </h2>
-          <p className="text-sm md:text-sm lg:text-lg text-gray-700 mt-4 text-center md:text-start">
+          <p className="text-sm dark:text-gray-300 md:text-sm lg:text-lg text-gray-700 mt-4 text-center md:text-start">
             At TutorLink, our mission is simple yet powerful: to bridge the gap
             between students and quality education by connecting them with
             experienced, passionate tutors. We believe that every student
@@ -67,10 +67,10 @@ const AboutComponent = () => {
 
       <div className=" mt-10 md:mt-20 mb-5 lg:mb-20">
         <div className="pt-5">
-          <h2 className="text-2xl md:text-3xl lg:text-5xl text-center">
+          <h2 className="text-2xl dark:text-gray-300 md:text-3xl lg:text-5xl text-center">
             Meet the Team
           </h2>
-          <p className="text-sm md:text-sm lg:text-lg text-gray-700 mt-4 max-w-[500px] text-center mx-auto">
+          <p className="text-sm dark:text-gray-300 md:text-sm lg:text-lg text-gray-700 mt-4 max-w-[500px] text-center mx-auto">
             TutorLink was founded by a team of educators, tech enthusiasts, and
             lifelong learners who saw a need for a better, more personal
             approach to tutoring. Our leadership team includes:
@@ -87,11 +87,11 @@ const AboutComponent = () => {
                   height={300}
                   alt="missoinImg"
                 ></Image>
-                <p className="text-sm font-semibold text-center pt-1">
+                <p className="text-sm dark:text-gray-300 font-semibold text-center pt-1">
                   Shariful Islam
                 </p>
               </div>
-              <p className="text-sm md:text-sm lg:text-lg text-gray-700 mt-4 max-w-[500px] px-5 pb-5">
+              <p className="text-sm dark:text-gray-300 md:text-sm lg:text-lg text-gray-700 mt-4 max-w-[500px] px-5 pb-5">
                 CEO – An educator with over 10 years of experience, passionate
                 about creating tools that empower students.
               </p>
@@ -104,11 +104,11 @@ const AboutComponent = () => {
                   height={300}
                   alt="missoinImg"
                 ></Image>
-                <p className="text-sm font-semibold text-center pt-1">
+                <p className="text-sm dark:text-gray-300 font-semibold text-center pt-1">
                   Meera Patek
                 </p>
               </div>
-              <p className="text-sm md:text-sm lg:text-lg text-gray-700 mt-4 max-w-[500px] px-5 pb-5">
+              <p className="text-sm dark:text-gray-300 md:text-sm lg:text-lg text-gray-700 mt-4 max-w-[500px] px-5 pb-5">
                 A software engineer and education advocate dedicated to building
                 intuitive, user-friendly platforms.
               </p>
@@ -121,11 +121,11 @@ const AboutComponent = () => {
                   height={300}
                   alt="missoinImg"
                 ></Image>
-                <p className="text-sm font-semibold text-center pt-1">
+                <p className="text-sm dark:text-gray-300 font-semibold text-center pt-1">
                   Daniel Kim
                 </p>
               </div>
-              <p className="text-sm md:text-sm lg:text-lg text-gray-700 mt-4 max-w-[500px] px-5 pb-5">
+              <p className="text-sm dark:text-gray-300 md:text-sm lg:text-lg text-gray-700 mt-4 max-w-[500px] px-5 pb-5">
                 Head of Operations – A former tutor who knows firsthand how
                 impactful one-on-one learning can be.
               </p>
@@ -138,11 +138,11 @@ const AboutComponent = () => {
                   height={300}
                   alt="missoinImg"
                 ></Image>
-                <p className="text-sm font-semibold text-center pt-1">
+                <p className="text-sm dark:text-gray-300 font-semibold text-center pt-1">
                   Rina Das
                 </p>
               </div>
-              <p className="text-sm md:text-sm lg:text-lg text-gray-700 mt-4 max-w-[500px] px-5 pb-5">
+              <p className="text-sm dark:text-gray-300 md:text-sm lg:text-lg text-gray-700 mt-4 max-w-[500px] px-5 pb-5">
                 Head of Product – A design thinker who ensures our platform is
                 always student-centered
               </p>
@@ -155,11 +155,11 @@ const AboutComponent = () => {
                   height={300}
                   alt="missoinImg"
                 ></Image>
-                <p className="text-sm font-semibold text-center pt-1">
+                <p className="text-sm dark:text-gray-300 font-semibold text-center pt-1">
                   Sophia Lin
                 </p>
               </div>
-              <p className="text-sm md:text-sm lg:text-lg text-gray-700 mt-4 max-w-[500px] px-5 pb-5">
+              <p className="text-sm dark:text-gray-300 md:text-sm lg:text-lg text-gray-700 mt-4 max-w-[500px] px-5 pb-5">
                 Community Manager – A connector of people, focused on building a
                 strong, supportive community
               </p>
@@ -172,11 +172,11 @@ const AboutComponent = () => {
                   height={300}
                   alt="missoinImg"
                 ></Image>
-                <p className="text-sm font-semibold text-center pt-1">
+                <p className="text-sm dark:text-gray-300 font-semibold text-center pt-1">
                   Jamal Owens
                 </p>
               </div>
-              <p className="text-sm md:text-sm lg:text-lg text-gray-700 mt-4 max-w-[500px] px-5 pb-5">
+              <p className="text-sm dark:text-gray-300 md:text-sm lg:text-lg text-gray-700 mt-4 max-w-[500px] px-5 pb-5">
                 Director of Global Partnerships With a background in education
                 outreach, Rina is helping us expand
               </p>
@@ -187,7 +187,7 @@ const AboutComponent = () => {
       {/* =================success section ========================== */}
       <div>
         <div>
-          <h2 className="text-2xl md:text-3xl lg:text-5xl order-2 md:order-1 text-center mb-5 pt-10 lg:pt-20">
+          <h2 className="text-2xl dark:text-gray-300 md:text-3xl lg:text-5xl order-2 md:order-1 text-center mb-5 pt-10 lg:pt-20">
             Our Student Success story
           </h2>
         </div>
@@ -210,14 +210,14 @@ const AboutComponent = () => {
                       height={300}
                       alt="missoinImg"
                     ></Image>
-                    <p className="text-sm font-semibold text-center pt-1">
+                    <p className="text-sm dark:text-gray-300 font-semibold text-center pt-1">
                       {item.username}
                     </p>
                   </div>
-                  <p className="text-sm md:text-sm lg:text-lg text-gray-700 mt-4 max-w-[500px] px-5 font-semibold">
+                  <p className="text-sm dark:text-gray-300 md:text-sm lg:text-lg text-gray-700 mt-4 max-w-[500px] px-5 font-semibold">
                     {item.name}
                   </p>
-                  <p className="text-sm md:text-sm lg:text-lg text-gray-700  max-w-[500px] px-5 pb-5">
+                  <p className="text-sm dark:text-gray-300 md:text-sm lg:text-lg text-gray-700  max-w-[500px] px-5 pb-5">
                     {item.body}
                   </p>
                 </div>

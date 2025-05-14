@@ -35,9 +35,9 @@ export function NavMain({
 }) {
   return (
     <SidebarGroup>
-      <SidebarGroupLabel className="hover:bg-gray-200">
+      <SidebarGroupLabel className="dark:hover:bg-gray-300/8 ">
         <Home></Home>
-        <Link className="pl-2 font-semibold text-lg" href={"/"}>
+        <Link className="pl-2 font-semibold  text-lg" href={"/"}>
           {" "}
           Home
         </Link>

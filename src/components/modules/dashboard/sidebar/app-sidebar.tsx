@@ -36,8 +36,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         icon: SquareTerminal,
         items: [
           {
-            title: "Profile",
+            title: "DashBoard",
             url: `/${user?.role}/dashboard`,
+          },
+          {
+            title: "Profile",
+            url: `/${user?.role}/profile`,
           },
         ],
       },

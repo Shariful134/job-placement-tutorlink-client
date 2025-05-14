@@ -94,96 +94,107 @@ const UpdateProfileStudent = () => {
   };
 
   return (
-    <div className="w-full flex-grow  max-w-md rounded">
-      <div className="mb-5 text-center text-2xl">Update Profile</div>
-      <div className="flex flex-col items-center mb-5 ">
-        {" "}
-        <div className="flex items-center justify-center ">
+    <div className="w-full flex-grow max-w-md rounded bg-white dark:bg-gray-900 p-6 shadow-md dark:shadow-lg text-gray-800 dark:text-gray-100 transition-colors">
+      <div className="mb-5 text-center text-2xl font-semibold">
+        Update Profile
+      </div>
+
+      <div className="flex flex-col items-center mb-5">
+        <div className="flex items-center justify-center">
           <UploadWidget onImageUpload={handleImageUpload} />
         </div>
-        <div className=" w-2/5 flex flex-grow flex-col space-y-1  mt-2"></div>
+        <div className="w-2/5 flex flex-grow flex-col space-y-1 mt-2" />
       </div>
+
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="flex flex-col ">
+          <div className="flex flex-col space-y-3">
             <FormField
               control={form.control}
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel className="text-gray-700 dark:text-gray-200">
+                    Name
+                  </FormLabel>
                   <FormControl>
                     <Input
                       type="text"
-                      className="border border-gray-400 "
+                      className="border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100"
                       {...field}
                       value={field.value || ""}
                     />
                   </FormControl>
-
                   <FormMessage className="text-red-500" />
                 </FormItem>
               )}
             />
+
             <FormField
               control={form.control}
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="mt-2">Email</FormLabel>
+                  <FormLabel className="text-gray-700 dark:text-gray-200">
+                    Email
+                  </FormLabel>
                   <FormControl>
                     <Input
                       type="text"
-                      className="border border-gray-400  "
+                      className="border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100"
                       {...field}
                       value={field.value || ""}
                     />
                   </FormControl>
-
                   <FormMessage className="text-red-500" />
                 </FormItem>
               )}
             />
+
             <FormField
               control={form.control}
               name="bio"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="mt-2">Bio Data</FormLabel>
+                  <FormLabel className="text-gray-700 dark:text-gray-200">
+                    Bio Data
+                  </FormLabel>
                   <FormControl>
                     <Input
                       type="text"
-                      className="border border-gray-400  "
+                      className="border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100"
                       {...field}
                       value={field.value || ""}
                     />
                   </FormControl>
-
                   <FormMessage className="text-red-500" />
                 </FormItem>
               )}
             />
+
             <FormField
               control={form.control}
               name="phoneNumber"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="mt-2">Phone Number</FormLabel>
+                  <FormLabel className="text-gray-700 dark:text-gray-200">
+                    Phone Number
+                  </FormLabel>
                   <FormControl>
                     <Input
                       type="text"
-                      className="border border-gray-400  "
+                      className="border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100"
                       {...field}
                       value={field.value || ""}
                     />
                   </FormControl>
-
                   <FormMessage className="text-red-500" />
                 </FormItem>
               )}
             />
+
             <Button
-              className="mt-2  cursor-pointer border-0 hover:border btn bg-gray-300 text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ..."
+              className="mt-4 py-2 px-4 font-semibold rounded bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white hover:opacity-90 transition"
               type="submit"
             >
               {isSubmitting ? "Updating..." : "Update"}
